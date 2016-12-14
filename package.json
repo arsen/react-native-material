@@ -1,0 +1,24 @@
+{
+  "name": "react-native-material",
+  "version": "0.0.1",
+  "description": "Material Design done right for React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arsenghazaryan/react-native-material.git"
+  },
+  "keywords": [
+    "react-native",
+    "material",
+    "design"
+  ],
+  "author": "= <=>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arsenghazaryan/react-native-material/issues"
+  },
+  "homepage": "https://github.com/arsenghazaryan/react-native-material#readme"
+}
