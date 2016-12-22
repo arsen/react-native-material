@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
-import Ripple from '../Ripple';
+// import Ripple from '../Ripple';
 
 import styles from './FlatButton.styles';
 

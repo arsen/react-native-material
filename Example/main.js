@@ -41,7 +41,7 @@ export default class Example extends Component {
       return (
         <View style={styles.container}>
         <TouchableNativeFeedback>
-          <View style={{ padding: 40 }}>
+          <View style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
             <Text>Hello World</Text>
           </View>
         </TouchableNativeFeedback>
@@ -54,7 +54,7 @@ export default class Example extends Component {
       <ThemeProvider>
         <View style={styles.container}>
 
-          <Touchable style={{ padding: 40 }}>
+          <Touchable style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
             <Text>Hello World</Text>
           </Touchable>
 

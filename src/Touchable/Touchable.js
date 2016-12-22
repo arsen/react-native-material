@@ -77,7 +77,7 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.overlayOpacity, {
       toValue: 1,
-      duration: 200
+      duration: 500
     }).start();
 
 
@@ -86,28 +86,30 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.rippleScale, {
       toValue: maxScale,
-      duration: 1000
+      duration: 2000
     }).start();
   }
 
   onTouchEnd() {
-    Animated.timing(this.state.overlayOpacity, {
-      toValue: 0,
-      duration: 100
-    }).start();
-
     let maxSize = Math.max(this.state.layout.width, this.state.layout.height) * 2;
     let maxScale = Math.round(maxSize / 2);
 
+    Animated.timing(this.state.rippleScale, {
+      toValue: maxScale,
+    }).start();
+
     Animated.sequence([
-      Animated.timing(this.state.rippleScale, {
-        toValue: maxScale,
-        duration: 300
-      }),
-      Animated.timing(this.state.rippleOpacity, {
-        toValue: 0,
-        duration: 50
-      }),
+      Animated.delay(120),
+      Animated.parallel([
+        Animated.timing(this.state.overlayOpacity, {
+          toValue: 0,
+          duration: 150
+        }),
+        Animated.timing(this.state.rippleOpacity, {
+          toValue: 0,
+          duration: 150
+        })
+      ])
     ]).start();
   }
 
