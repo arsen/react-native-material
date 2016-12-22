@@ -27,5 +27,9 @@
     "jest": "^18.0.0",
     "react": "^15.4.1",
     "react-test-renderer": "^15.4.1"
+  },
+  "dependencies": {
+    "color": "^1.0.3",
+    "deep-assign": "^2.0.0"
   }
 }
