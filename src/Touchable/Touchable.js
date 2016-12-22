@@ -11,8 +11,8 @@ import styles from './Touchable.styles';
 export default class Touchable extends Component {
 
   static defaultProps = {
-    overlayColor: 'rgba(0,0,0, 0.05)',
-    rippleColor: 'rgba(0,0,0, 0.1)',
+    overlayColor: 'rgba(0,0,0, 0.02)',
+    rippleColor: 'rgba(0,0,0, 0.04)',
   }
 
   constructor(props) {
@@ -99,15 +99,15 @@ export default class Touchable extends Component {
     }).start();
 
     Animated.sequence([
-      Animated.delay(120),
+      Animated.delay(100),
       Animated.parallel([
         Animated.timing(this.state.overlayOpacity, {
           toValue: 0,
-          duration: 150
+          duration: 200
         }),
         Animated.timing(this.state.rippleOpacity, {
           toValue: 0,
-          duration: 150
+          duration: 200
         })
       ])
     ]).start();

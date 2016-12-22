@@ -45,6 +45,10 @@ export default class Example extends Component {
             <Text>Hello World</Text>
           </View>
         </TouchableNativeFeedback>
+
+        <Touchable style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
+            <Text>Hello World</Text>
+          </Touchable>
         </View>
       );
 
