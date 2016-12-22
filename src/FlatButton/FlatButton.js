@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import {
   View,
   Text,
-  TouchableWithoutFeedback
 } from 'react-native';
 
-// import Ripple from '../Ripple';
+import Touchable from '../Touchable';
 
 import styles from './FlatButton.styles';
 
@@ -23,17 +22,19 @@ export default class FlatButton extends Component {
   }
 
   render() {
-    console.log('context', this.context.theme);
+    const theme = this.context.theme;
+    const props = this.props;
     return (
-      <TouchableWithoutFeedback onPressIn={(data)=> {
-        console.log('pressing', data.nativeEvent);
-      }}>
-        <View style={styles.default(this.context.theme, this.props)}>
-          <Text style={styles.label(this.context.theme, this.props)}>
-            {this.props.label}
+      <View style={styles.default(theme, props)}>
+        <Touchable
+          style={[styles.rippleStyles()]}
+          overlayColor={styles.rippleOverlayColor(theme, props)}
+          rippleColor={styles.rippleColor(theme, props)} >
+          <Text style={styles.label(theme, props)}>
+            {props.label}
           </Text>
-        </View>
-      </TouchableWithoutFeedback>
+        </Touchable>
+      </View>
     );
   }
 }
