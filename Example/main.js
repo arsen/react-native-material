@@ -13,16 +13,42 @@ import {
   TouchableHighlight,
   TouchableNativeFeedback,
   Platform,
+  Animated,
 } from 'react-native';
 
 import { ThemeProvider, FlatButton, Touchable } from 'react-native-material';
 
 export default class Example extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      scale: new Animated.Value(1)
+    };
+  }
+
+  componentDidMount() {
+    Animated.timing(this.state.scale, {
+      toValue: 200,
+      duration: 2000
+    }).start();
+  }
+
   render() {
-    // <FlatButton label="Normal"/>
-    // <FlatButton label="Primary" primary={true}/>
-    // <FlatButton label="Secondary" secondary={true}/>
-    // <FlatButton label="Disabled" disabled={true}/>
+    return (
+      <ThemeProvider>
+        <View style={styles.container}>
+
+          <View style={{borderWidth: 0, margin: 50, padding: 20, alignSelf: 'stretch'}}>
+            <FlatButton label="Normal" style={{ marginBottom: 40 }} />
+            <FlatButton label="Primary" primary={true} style={{ marginBottom: 40 }} />
+            <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 40 }} />
+            <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 40 }} />
+          </View>
+
+
+        </View>
+      </ThemeProvider>
+    );
 
     // <View style={{width: 200, height: 200, backgroundColor: 'red', overflow: 'hidden'}}>
     //   <View style={{
@@ -37,34 +63,58 @@ export default class Example extends Component {
     //   }} />
     // </View>  
 
-    if (Platform.OS === 'android') {
-      return (
-        <View style={styles.container}>
-        <TouchableNativeFeedback>
-          <View style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
-            <Text>Hello World</Text>
-          </View>
-        </TouchableNativeFeedback>
 
-        <Touchable style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
-            <Text>Hello World</Text>
-          </Touchable>
-        </View>
-      );
+    // <Animated.View style={{
+    //   position: 'absolute',
+    //   top: 100,
+    //   left: 100,
+    //   marginLeft: this.state.scale.interpolate({
+    //     inputRange: [1, 200],
+    //     outputRange: [0, -100]
+    //   }),
+    //   marginTop: this.state.scale.interpolate({
+    //     inputRange: [1, 200],
+    //     outputRange: [0, -100]
+    //   }),
+    //   width: this.state.scale,
+    //   height: this.state.scale,
+    //   borderRadius: 20000,
+    //   backgroundColor: 'blue',
+    //   // transform: [
+    //   //   {
+    //   //     scale: this.state.scale
+    //   //   }
+    //   // ]
+    // }} />
 
-    }
+    // if (Platform.OS === 'android') {
+    //   return (
+    //     <View style={styles.container}>
+    //       <TouchableNativeFeedback>
+    //         <View style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
+    //           <Text>Hello World</Text>
+    //         </View>
+    //       </TouchableNativeFeedback>
 
-    return (
-      <ThemeProvider>
-        <View style={styles.container}>
+    //       <Touchable style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
+    //         <Text>Hello World</Text>
+    //       </Touchable>
+    //     </View>
+    //   );
 
-          <Touchable style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
-            <Text>Hello World</Text>
-          </Touchable>
+    // }
 
-        </View>
-      </ThemeProvider>
-    );
+    // return (
+    //   <ThemeProvider>
+    //     <View style={styles.container}>
+
+    //       <Touchable style={{ paddingTop: 30, paddingBottom: 30, paddingLeft: 60, paddingRight: 60 }}>
+    //         <Text>Hello World</Text>
+    //       </Touchable>
+
+    //     </View>
+    //   </ThemeProvider>
+    // );
   }
 }
 
