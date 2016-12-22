@@ -16,23 +16,9 @@ export default class FlatButton extends Component {
     theme: PropTypes.object.isRequired,
   }
 
-  static propTypes = {
-    label: PropTypes.string.isRequired,
-    onPress: PropTypes.func,
-    onLongPress: PropTypes.func,
-    style: PropTypes.object,
-    primary: PropTypes.bool,
-    secondary: PropTypes.bool,
-    disabled: PropTypes.bool,
-  }
-
   static defaultProps = {
     onPress: () => { },
-    onLongPress: () => {},
-    style: {},
-    primary: false,
-    secondary: false,
-    disabled: false,
+    label: "",
   }
 
   render() {

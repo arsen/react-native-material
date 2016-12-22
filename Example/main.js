@@ -37,15 +37,10 @@ export default class Example extends Component {
     return (
       <ThemeProvider>
         <View style={styles.container}>
-
-          <View style={{borderWidth: 0, margin: 50, padding: 20, alignSelf: 'stretch'}}>
             <FlatButton label="Normal" style={{ marginBottom: 40 }} />
             <FlatButton label="Primary" primary={true} style={{ marginBottom: 40 }} />
             <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 40 }} />
             <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 40 }} />
-          </View>
-
-
         </View>
       </ThemeProvider>
     );
