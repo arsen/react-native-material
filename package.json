@@ -26,6 +26,7 @@
     "babel-preset-react-native": "1.9.1",
     "jest": "18.0.0",
     "react": "15.4.1",
+    "react-native": "^0.39.2",
     "react-test-renderer": "15.4.1"
   },
   "dependencies": {
@@ -33,7 +34,6 @@
     "deep-assign": "^2.0.0"
   },
   "jest": {
-    "preset": "react-native",
-    "testPathDirs": ["src/"]
+    "preset": "react-native"
   }
 }
