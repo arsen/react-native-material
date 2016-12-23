@@ -120,7 +120,7 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
-      duration: 2000
+      duration: 1000
     }).start();
   }
 

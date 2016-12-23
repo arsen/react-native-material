@@ -6,9 +6,6 @@
   "scripts": {
     "test": "jest"
   },
-  "jest": {
-    "preset": "react-native"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arsenghazaryan/react-native-material.git"
@@ -25,14 +22,18 @@
   },
   "homepage": "https://github.com/arsenghazaryan/react-native-material#readme",
   "devDependencies": {
-    "babel-jest": "^18.0.0",
-    "babel-preset-react-native": "^1.9.1",
-    "jest": "^18.0.0",
-    "react": "^15.4.1",
-    "react-test-renderer": "^15.4.1"
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "18.0.0",
+    "react": "15.4.1",
+    "react-test-renderer": "15.4.1"
   },
   "dependencies": {
     "color": "^1.0.3",
     "deep-assign": "^2.0.0"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testPathDirs": ["src/"]
   }
 }
