@@ -55,6 +55,7 @@ export default class Touchable extends Component {
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: (evt, gestureState) => false,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
 
@@ -77,6 +78,7 @@ export default class Touchable extends Component {
         this.props.onPress();
       },
       onPanResponderTerminate: (evt, gestureState) => {
+        console.log('onPanResponderTerminate');
         clearTimeout(this.longPressTimeout);
         this.onTouchEnd();
         this.props.onPressOut(evt, gestureState);

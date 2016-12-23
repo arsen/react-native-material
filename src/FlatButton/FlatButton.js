@@ -38,16 +38,19 @@ export default class FlatButton extends Component {
   render() {
     const theme = this.context.theme;
     const props = this.props;
+    const Wrapper = props.disabled ? View : Touchable;
     return (
       <View style={styles.default(theme, props)}>
-        <Touchable
+        <Wrapper
+          onPress={props.onPress}
+          onLongPress={props.onLongPress}
           style={[styles.rippleStyles()]}
           overlayColor={styles.rippleOverlayColor(theme, props)}
           rippleColor={styles.rippleColor(theme, props)} >
           <Text style={styles.label(theme, props)}>
             {props.label}
           </Text>
-        </Touchable>
+        </Wrapper>
       </View>
     );
   }
