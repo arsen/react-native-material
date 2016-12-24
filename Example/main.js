@@ -17,26 +17,57 @@ import {
   ScrollView
 } from 'react-native';
 
-import { ThemeProvider, FlatButton, Touchable } from 'react-native-material';
+import {
+  ThemeProvider,
+  FlatButton,
+  RaisedButton,
+  Touchable,
+  Paper,
+} from 'react-native-material';
 
 export default class Example extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      elevation: 2,
+    };
   }
 
+  componentDidMount() {
+    // setInterval(() => {
+    //   this.setState({
+    //     elevation: this.state.elevation+1
+    //   });
+    // }, 1000);
+  }
+
+
+
+
+
+  // <Paper elevation={5} style={{ backgroundColor: 'red', padding: 50 }}>
+  //   <Text>Hello</Text>
+  // </Paper>
+
+          // <FlatButton label="Normal" style={{ marginBottom: 20 }} onPress={() => {
+          //   console.log('onPress');
+          // } } />
+          // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
+          // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
+
+          // <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
+          // <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          // <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
+          
   render() {
     return (
       <ThemeProvider>
-          <View style={styles.container}>
-            <FlatButton label="Normal" style={{ marginBottom: 40 }} onPress={() => {
-              console.log('onPress');
-            } }
-              
-              />
-            <FlatButton label="Primary" primary={true} style={{ marginBottom: 40 }} />
-            <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 40 }} />
-            <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 40 }} />
-          </View>
+        <View style={styles.container}>
+          <RaisedButton label="Normal"/>
+
+        </View>
       </ThemeProvider>
     );
   }

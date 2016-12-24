@@ -3,12 +3,7 @@ import {
   View,
   Animated,
   TouchableWithoutFeedback,
-  PanResponder,
-  findNodeHandle,
-  NativeModules,
 } from 'react-native';
-
-const UIManager = NativeModules.UIManager;
 
 import styles from './Touchable.styles';
 
@@ -21,7 +16,8 @@ export default class Touchable extends Component {
     onPressOut: () => { },
     overlayColor: 'rgba(0,0,0, 0.02)',
     rippleColor: 'rgba(0,0,0, 0.04)',
-    padding: {},
+    style: {},
+    containerStyle: {},
   }
 
   constructor(props) {
@@ -103,7 +99,7 @@ export default class Touchable extends Component {
       top: this.state.touchPosition.y,
       left: this.state.touchPosition.x,
       backgroundColor: this.props.rippleColor,
-      borderRadius: 2000,
+      borderRadius: 1000,
       width: this.state.rippleScale,
       height: this.state.rippleScale,
       marginLeft: this.state.rippleScale.interpolate({
@@ -116,31 +112,37 @@ export default class Touchable extends Component {
       }),
     }
 
+    //android hack
+    let borderRadiusStyles = {};
+    if (this.props.containerStyle.borderRadius) {
+      borderRadiusStyles.borderRadius = this.props.containerStyle.borderRadius;
+    }
     return (
       <View
-        style={[styles.container]}
+        removeClippedSubviews={true}
+        style={[styles.container, this.props.containerStyle]}
         onLayout={this.onLayout.bind(this)} >
-        <TouchableWithoutFeedback
-          onPress={this.props.onPress}
-          onLongPress={this.props.onLongPress}
-          onPressIn={(evt) => {
-            let touchPositionRelative = {
-              x: evt.nativeEvent.locationX,
-              y: evt.nativeEvent.locationY,
-            }
-            this.onTouchStart(touchPositionRelative);
-            this.props.onPressIn();
-          } }
-          onPressOut={(evt) => {
-            this.onTouchEnd();
-            this.props.onPressOut();
-          } } >
-          <View style={[this.props.style]}>
-            {this.props.children}
-          </View>
-        </TouchableWithoutFeedback>
-        <Animated.View style={[styles.overlay, overlayStyles]} pointerEvents="none"></Animated.View>
-        <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View>
+          <TouchableWithoutFeedback
+            onPress={this.props.onPress}
+            onLongPress={this.props.onLongPress}
+            onPressIn={(evt) => {
+              let touchPositionRelative = {
+                x: evt.nativeEvent.locationX,
+                y: evt.nativeEvent.locationY,
+              }
+              this.onTouchStart(touchPositionRelative);
+              this.props.onPressIn();
+            } }
+            onPressOut={(evt) => {
+              this.onTouchEnd();
+              this.props.onPressOut();
+            } } >
+            <View style={this.props.style}>
+              {this.props.children}
+            </View>
+          </TouchableWithoutFeedback>
+          <Animated.View style={[styles.overlay, overlayStyles, borderRadiusStyles]} pointerEvents="none"></Animated.View>
+          <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View>
       </View>
     );
   }

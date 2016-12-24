@@ -4,37 +4,83 @@ import {
   Text,
 } from 'react-native';
 
-import Touchable from '../Touchable';
+import Button from '../internal/Button';
 
-import styles from './FlatButton.styles';
+import styles from './RaisedButton.styles';
 
-export default class FlatButton extends Component {
+/**
+ * FlatButton Component.
+ */
+export default class RaisedButton extends Component {
   constructor(props) {
     super(props);
   }
+
   static contextTypes = {
     theme: PropTypes.object.isRequired,
   }
 
+  static propTypes = {
+    /**
+     * Label for the button.
+     */
+    label: PropTypes.string.isRequired,
+
+    /**
+     * Callback function when button is pressed.
+     */
+    onPress: PropTypes.func,
+
+    /**
+     * Callback function when button is long pressed.
+     */
+    onLongPress: PropTypes.func,
+
+    /**
+     * Override button container styles.
+     */
+    style: PropTypes.object,
+
+    /**
+     * If true, colors button according to primary color from the Theme
+     */
+    primary: PropTypes.bool,
+
+    /**
+     * If true, colors button according to secondary color from the Theme
+     */
+    secondary: PropTypes.bool,
+
+    /**
+     * 	Disables the button if set to true.
+     */
+    disabled: PropTypes.bool,
+  }
+
   static defaultProps = {
     onPress: () => { },
-    label: "",
+    onLongPress: null,
+    style: {},
+    labelStyle: {},
+    primary: false,
+    secondary: false,
+    disabled: false,
   }
 
   render() {
-    const theme = this.context.theme;
+    const theme = this.context.theme.RaisedButton;
     const props = this.props;
     return (
-      <View style={styles.default(theme, props)}>
-        <Touchable
-          style={[styles.rippleStyles()]}
-          overlayColor={styles.rippleOverlayColor(theme, props)}
-          rippleColor={styles.rippleColor(theme, props)} >
-          <Text style={styles.label(theme, props)}>
-            {props.label}
-          </Text>
-        </Touchable>
-      </View>
+      <Button 
+        label={props.label}
+        style={[styles.container(theme, props), props.style]}
+        innerStyle={styles.innerStyle()}
+        labelStyle={styles.labelStyle(theme, props)}
+        disabled={props.disabled}
+        onPress={props.onPress}
+        onLongPress={props.onLongPress}
+        elevation={2}
+      />
     );
   }
 }

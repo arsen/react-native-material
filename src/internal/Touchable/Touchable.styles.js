@@ -7,8 +7,6 @@ import {
 export default StyleSheet.create({
   container: {
     overflow: 'hidden',
-    borderRadius: 2,
-    // borderWidth: 1,
   },
 
   overlay: {
@@ -21,9 +19,6 @@ export default StyleSheet.create({
   },
 
   ripple: {
-    // width: 4,
-    // height: 4,
-    // borderRadius: 4,
     marginTop: -2,
     marginLeft: -2,
     position: 'absolute',

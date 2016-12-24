@@ -4,57 +4,39 @@ import Color from 'color';
 
 export default {
 
-  default: (theme, props) => {
-    let styles = {
-      
-      backgroundColor: theme.palette.transparent,
-      // backgroundColor: '#eee',
-      // elevation: 1,
-      // flexDirection: 'row',
-    };
+  container: (theme, props) => {
+    let bgColor = props.disabled ? theme.disabledBackgroundColor :
+      props.primary ? theme.primaryBackgroundColor :
+        props.secondary ? theme.secondaryBackgroundColor :
+          theme.backgroundColor;
 
-    return deepAssign(styles, props.style);
+    return styles = {
+      backgroundColor: bgColor,
+    };
   },
 
-  rippleStyles: (theme, props) => {
+  innerStyle: () => {
     return {
-      paddingLeft: 16,
-      paddingRight: 16,
-      paddingTop: 8,
-      paddingBottom: 8,
+      paddingLeft: 36,
+      paddingRight: 36,
+      paddingTop: 18,
+      paddingBottom: 18,
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row'
     };
   },
 
-  rippleColor: (theme, props) => {
-    let color = props.disabled ? theme.palette.disabledTextColor :
-      props.primary ? theme.palette.primaryColor :
-        props.secondary ? theme.palette.accentColor :
-          theme.palette.primaryTextColor;
-    return Color(color).fade(0.9).rgb().toString();
-  },
-
-  rippleOverlayColor: (theme, props) => {
-    let color = props.disabled ? theme.palette.disabledTextColor :
-      props.primary ? theme.palette.primaryColor :
-        props.secondary ? theme.palette.accentColor :
-          theme.palette.primaryTextColor;
-    return Color(color).fade(0.95).rgb().toString();
-  },
-
-  label: (theme, props) => {
-    let color = props.disabled ? theme.palette.disabledTextColor :
-      props.primary ? theme.palette.primaryColor :
-        props.secondary ? theme.palette.accentColor :
-          theme.palette.primaryTextColor;
+  labelStyle: (theme, props) => {
+    let color = props.disabled ? theme.disabledLabelColor :
+      props.primary ? theme.primaryLabelColor :
+        props.secondary ? theme.secondaryLabelColor :
+          theme.labelColor;
 
     let styles = {
       fontSize: 14,
       color: color,
     };
-
-    return deepAssign(styles, props.styles);
-  }
+    return deepAssign(styles, props.labelStyle);
+  },
 };
