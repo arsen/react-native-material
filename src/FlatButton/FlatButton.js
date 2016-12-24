@@ -28,7 +28,7 @@ export default class FlatButton extends Component {
 
   static defaultProps = {
     onPress: () => { },
-    onLongPress: () => { },
+    onLongPress: null,
     style: {},
     primary: false,
     secondary: false,

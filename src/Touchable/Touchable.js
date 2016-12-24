@@ -16,7 +16,7 @@ export default class Touchable extends Component {
 
   static defaultProps = {
     onPress: () => { },
-    onLongPress: () => { },
+    onLongPress: null,
     onPressIn: () => { },
     onPressOut: () => { },
     overlayColor: 'rgba(0,0,0, 0.02)',
@@ -37,57 +37,12 @@ export default class Touchable extends Component {
         y: 0
       },
     };
-    this._panResponder = {};
-    this._panResponderDisabled = {};
     this.rippleSize = 0;
     this.longPressTimeout = null;
     this.layoutChanged = false;
   }
 
-  componentWillMount() {
-    this._panResponderDisabled = PanResponder.create({
-      onMoveShouldSetPanResponder: (evt, gestureState) => false,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
-      onStartShouldSetPanResponder: (evt, gestureState) => false,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
-    });
-
-    this._panResponder = PanResponder.create({
-      onMoveShouldSetPanResponder: (evt, gestureState) => false,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-
-      onPanResponderGrant: (evt, gestureState) => {
-        let touchPositionRelative = {
-          x: gestureState.x0 - this.state.layout.pageX,
-          y: gestureState.y0 - this.state.layout.pageY
-        }
-        this.onTouchStart(touchPositionRelative);
-        this.props.onPressIn(evt, gestureState);
-
-        this.longPressTimeout = setTimeout(() => {
-          this.props.onLongPress();
-        }, 700);
-      },
-      onPanResponderRelease: (evt, gestureState) => {
-        clearTimeout(this.longPressTimeout);
-        this.onTouchEnd();
-        this.props.onPressOut(evt, gestureState);
-        this.props.onPress();
-      },
-      onPanResponderTerminate: (evt, gestureState) => {
-        console.log('onPanResponderTerminate');
-        clearTimeout(this.longPressTimeout);
-        this.onTouchEnd();
-        this.props.onPressOut(evt, gestureState);
-      },
-    });
-  }
-
   onLayout(event) {
-    console.log('onLayout', event.nativeEvent.layout);
     this.setState({
       layout: event.nativeEvent.layout
     });
@@ -104,8 +59,6 @@ export default class Touchable extends Component {
       toValue: 1,
       duration: 500
     }).start();
-
-
 
     this.rippleSize = parseInt(
       2 * Math.sqrt(Math.pow(this.state.layout.width, 2) +
@@ -168,6 +121,8 @@ export default class Touchable extends Component {
         style={[styles.container]}
         onLayout={this.onLayout.bind(this)} >
         <TouchableWithoutFeedback
+          onPress={this.props.onPress}
+          onLongPress={this.props.onLongPress}
           onPressIn={(evt) => {
             let touchPositionRelative = {
               x: evt.nativeEvent.locationX,
@@ -177,7 +132,6 @@ export default class Touchable extends Component {
             this.props.onPressIn();
           } }
           onPressOut={(evt) => {
-            console.log('onpressOut');
             this.onTouchEnd();
             this.props.onPressOut();
           } } >
