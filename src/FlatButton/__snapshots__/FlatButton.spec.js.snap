@@ -7,64 +7,63 @@ exports[`test Flatbutton renders correctly 1`] = `
   }>
   <View
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
       Array [
         Object {
           "borderRadius": 2,
           "overflow": "hidden",
         },
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "paddingBottom": 8,
-            "paddingLeft": 16,
-            "paddingRight": 16,
-            "paddingTop": 8,
-          },
-        ],
       ]
     }>
     <View
-      onMoveShouldSetResponder={[Function]}
-      onMoveShouldSetResponderCapture={[Function]}
-      onResponderEnd={[Function]}
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      hitSlop={undefined}
+      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
-      onResponderReject={[Function]}
       onResponderRelease={[Function]}
-      onResponderStart={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      onStartShouldSetResponderCapture={[Function]}>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.87)",
-            "fontSize": 14,
-          }
-        }>
-        Flat Button
-      </Text>
+      style={
+        Array [
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingBottom": 8,
+              "paddingLeft": 16,
+              "paddingRight": 16,
+              "paddingTop": 8,
+            },
+          ],
+        ]
+      }
+      testID={undefined}>
+      <View
+        pointerEvents="none"
+        style={Object {}}>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          pointerEvents="none"
+          style={
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontSize": 14,
+            }
+          }>
+          Flat Button
+        </Text>
+      </View>
     </View>
     <View
+      pointerEvents="none"
       style={
         Object {
           "backgroundColor": "rgba(0, 0, 0, 0.04349999999999998)",
@@ -78,6 +77,7 @@ exports[`test Flatbutton renders correctly 1`] = `
         }
       } />
     <View
+      pointerEvents="none"
       style={
         Object {
           "backgroundColor": "rgba(0, 0, 0, 0.08699999999999997)",

@@ -87,18 +87,10 @@ export default class Touchable extends Component {
   }
 
   onLayout(event) {
-    this.layoutChanged = true;
-    this.component && this.component.measure && this.component.measure((x, y, width, height, pageX, pageY) => {
-      this.setState({
-        layout: {
-          x, y, width, height, pageX, pageY
-        }
-      });
+    console.log('onLayout', event.nativeEvent.layout);
+    this.setState({
+      layout: event.nativeEvent.layout
     });
-  }
-
-  onRef(component) {
-    this.component = component;
   }
 
   onTouchStart(pos) {
@@ -173,17 +165,28 @@ export default class Touchable extends Component {
 
     return (
       <View
-        ref={(component) => {
-          this.onRef(component);
-        } }
-        style={[styles.container, this.props.style]}
-        onLayout={this.onLayout.bind(this)}
-        {...this._panResponder.panHandlers} >
-        <View {...this._panResponderDisabled.panHandlers}>
-          {this.props.children}
-        </View>
-        <Animated.View style={[styles.overlay, overlayStyles]}></Animated.View>
-        <Animated.View style={[styles.ripple, rippleStyles]}></Animated.View>
+        style={[styles.container]}
+        onLayout={this.onLayout.bind(this)} >
+        <TouchableWithoutFeedback
+          onPressIn={(evt) => {
+            let touchPositionRelative = {
+              x: evt.nativeEvent.locationX,
+              y: evt.nativeEvent.locationY,
+            }
+            this.onTouchStart(touchPositionRelative);
+            this.props.onPressIn();
+          } }
+          onPressOut={(evt) => {
+            console.log('onpressOut');
+            this.onTouchEnd();
+            this.props.onPressOut();
+          } } >
+          <View style={[this.props.style]}>
+            {this.props.children}
+          </View>
+        </TouchableWithoutFeedback>
+        <Animated.View style={[styles.overlay, overlayStyles]} pointerEvents="none"></Animated.View>
+        <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View>
       </View>
     );
   }

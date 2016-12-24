@@ -28,7 +28,7 @@ export default class FlatButton extends Component {
 
   static defaultProps = {
     onPress: () => { },
-    onLongPress: () => {},
+    onLongPress: () => { },
     style: {},
     primary: false,
     secondary: false,
@@ -47,9 +47,11 @@ export default class FlatButton extends Component {
           style={[styles.rippleStyles()]}
           overlayColor={styles.rippleOverlayColor(theme, props)}
           rippleColor={styles.rippleColor(theme, props)} >
-          <Text style={styles.label(theme, props)}>
-            {props.label}
-          </Text>
+          <View pointerEvents="none" style={{}}>
+            <Text style={styles.label(theme, props)} pointerEvents="none">
+              {props.label}
+            </Text>
+          </View>
         </Wrapper>
       </View>
     );
