@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E67AB411E0F438C00FCE1F1 /* RNMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E67AB401E0F438C00FCE1F1 /* RNMaterial.m */; };
-		3E67AB421E0F438C00FCE1F1 /* RNMaterial.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E67AB3F1E0F438C00FCE1F1 /* RNMaterial.h */; };
+		3E67AB4A1E0F491B00FCE1F1 /* RNMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E67AB491E0F491B00FCE1F1 /* RNMaterialView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -18,7 +17,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				3E67AB421E0F438C00FCE1F1 /* RNMaterial.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -26,8 +24,9 @@
 
 /* Begin PBXFileReference section */
 		3E67AB3C1E0F438C00FCE1F1 /* libRNMaterial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNMaterial.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E67AB3F1E0F438C00FCE1F1 /* RNMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNMaterial.h; sourceTree = "<group>"; };
-		3E67AB401E0F438C00FCE1F1 /* RNMaterial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMaterial.m; sourceTree = "<group>"; };
+		3E67AB481E0F491B00FCE1F1 /* RNMaterialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMaterialView.h; sourceTree = "<group>"; };
+		3E67AB491E0F491B00FCE1F1 /* RNMaterialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMaterialView.m; sourceTree = "<group>"; };
+		3E67AB4B1E0F493E00FCE1F1 /* RNMaterialViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNMaterialViewManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +59,9 @@
 		3E67AB3E1E0F438C00FCE1F1 /* RNMaterial */ = {
 			isa = PBXGroup;
 			children = (
-				3E67AB3F1E0F438C00FCE1F1 /* RNMaterial.h */,
-				3E67AB401E0F438C00FCE1F1 /* RNMaterial.m */,
+				3E67AB481E0F491B00FCE1F1 /* RNMaterialView.h */,
+				3E67AB491E0F491B00FCE1F1 /* RNMaterialView.m */,
+				3E67AB4B1E0F493E00FCE1F1 /* RNMaterialViewManager.h */,
 			);
 			path = RNMaterial;
 			sourceTree = "<group>";
@@ -124,7 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E67AB411E0F438C00FCE1F1 /* RNMaterial.m in Sources */,
+				3E67AB4A1E0F491B00FCE1F1 /* RNMaterialView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +258,7 @@
 				3E67AB471E0F438C00FCE1F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -119,7 +119,6 @@ export default class Touchable extends Component {
     }
     return (
       <View
-        removeClippedSubviews={true}
         style={[styles.container, this.props.containerStyle]}
         onLayout={this.onLayout.bind(this)} >
           <TouchableWithoutFeedback

@@ -6,7 +6,7 @@ export default {
 
   container: {
     // overflow: 'hidden',
-    borderRadius: 20,
+    borderRadius: 10,
     // borderWidth: 2,
     // width: 138,
     // height: 75,
@@ -14,6 +14,8 @@ export default {
   },
 
   inner: {
+    borderRadius: 10,
+    overflow: 'hidden',
     // width: 118,
     // height: 55,
     // position: 'absolute',
