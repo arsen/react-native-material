@@ -8,7 +8,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewManager;
-import package io.devshot.rnmaterial.RNMaterialView;
+import io.devshot.rnmaterial.RNMaterialView;
 
 
 public class RNMaterialViewManager extends ReactViewManager {

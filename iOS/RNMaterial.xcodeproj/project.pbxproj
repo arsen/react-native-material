@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0F41331E10737000331E2E /* RNMaterialIconsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0F41321E10737000331E2E /* RNMaterialIconsManager.m */; };
 		3E67AB4A1E0F491B00FCE1F1 /* RNMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E67AB491E0F491B00FCE1F1 /* RNMaterialView.m */; };
+		3E67AB781E0F555100FCE1F1 /* RNMaterialViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E67AB771E0F555100FCE1F1 /* RNMaterialViewManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,10 +25,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E0F41311E10737000331E2E /* RNMaterialIconsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMaterialIconsManager.h; sourceTree = "<group>"; };
+		3E0F41321E10737000331E2E /* RNMaterialIconsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMaterialIconsManager.m; sourceTree = "<group>"; };
 		3E67AB3C1E0F438C00FCE1F1 /* libRNMaterial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNMaterial.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E67AB481E0F491B00FCE1F1 /* RNMaterialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMaterialView.h; sourceTree = "<group>"; };
 		3E67AB491E0F491B00FCE1F1 /* RNMaterialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMaterialView.m; sourceTree = "<group>"; };
-		3E67AB4B1E0F493E00FCE1F1 /* RNMaterialViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNMaterialViewManager.h; sourceTree = "<group>"; };
+		3E67AB771E0F555100FCE1F1 /* RNMaterialViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMaterialViewManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +65,9 @@
 			children = (
 				3E67AB481E0F491B00FCE1F1 /* RNMaterialView.h */,
 				3E67AB491E0F491B00FCE1F1 /* RNMaterialView.m */,
-				3E67AB4B1E0F493E00FCE1F1 /* RNMaterialViewManager.h */,
+				3E67AB771E0F555100FCE1F1 /* RNMaterialViewManager.m */,
+				3E0F41311E10737000331E2E /* RNMaterialIconsManager.h */,
+				3E0F41321E10737000331E2E /* RNMaterialIconsManager.m */,
 			);
 			path = RNMaterial;
 			sourceTree = "<group>";
@@ -125,6 +131,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E67AB4A1E0F491B00FCE1F1 /* RNMaterialView.m in Sources */,
+				3E0F41331E10737000331E2E /* RNMaterialIconsManager.m in Sources */,
+				3E67AB781E0F555100FCE1F1 /* RNMaterialViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +179,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/ReactCommon/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -212,7 +226,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/ReactCommon/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -223,6 +243,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 56YR8Z5FRB;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/ReactCommon/**",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -233,6 +259,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 56YR8Z5FRB;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/ReactCommon/**",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -1,3 +1,4 @@
 rootProject.name = 'Example'
-
 include ':app'
+include ':react-native-material'
+project(':react-native-material').projectDir = new File(rootProject.projectDir, '../../android')

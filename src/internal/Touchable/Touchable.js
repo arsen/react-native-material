@@ -26,7 +26,7 @@ export default class Touchable extends Component {
     this.state = {
       overlayOpacity: new Animated.Value(0),
       rippleScale: new Animated.Value(0),
-      rippleOpacity: new Animated.Value(1),
+      rippleOpacity: new Animated.Value(20),
       layout: { width: 0, height: 0 },
       touchPosition: {
         x: 0,
@@ -63,13 +63,14 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
-      duration: 1000
+      duration: 700
     }).start();
   }
 
   onTouchEnd() {
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
+      duration: 400,
     }).start();
 
     Animated.sequence([

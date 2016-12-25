@@ -6,21 +6,12 @@ export default {
 
   container: {
     // overflow: 'hidden',
-    borderRadius: 10,
-    // borderWidth: 2,
-    // width: 138,
-    // height: 75,
-    // borderColor: '#fff',
+    borderRadius: 2,
   },
 
   inner: {
-    borderRadius: 10,
+    borderRadius: 2,
     overflow: 'hidden',
-    // width: 118,
-    // height: 55,
-    // position: 'absolute',
-    // top: 10,
-    // left: 10,
   },
   
   rippleColor: (props) => {

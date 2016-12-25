@@ -29,16 +29,16 @@
 @protocol RNMaterialViewDelegate <NSObject>
 
 @required
-- (void)touchable:(MKTouchable*)view touchesBegan:(UITouch*)touch;
+- (void)touchable:(RNMaterialView*)view touchesBegan:(UITouch*)touch;
 
 @required
-- (void)touchable:(MKTouchable *)view touchesMoved:(UITouch *)touch;
+- (void)touchable:(RNMaterialView *)view touchesMoved:(UITouch *)touch;
 
 @required
-- (void)touchable:(MKTouchable *)view touchesEnded:(UITouch *)touch;
+- (void)touchable:(RNMaterialView *)view touchesEnded:(UITouch *)touch;
 
 @required
-- (void)touchable:(MKTouchable *)view touchesCancelled:(UITouch *)touch;
+- (void)touchable:(RNMaterialView *)view touchesCancelled:(UITouch *)touch;
 
 @end
 

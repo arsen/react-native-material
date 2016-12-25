@@ -12,6 +12,7 @@ import {
   View,
   TouchableHighlight,
   TouchableNativeFeedback,
+  TouchableWithoutFeedback,
   Platform,
   Animated,
   ScrollView
@@ -21,7 +22,9 @@ import {
   ThemeProvider,
   FlatButton,
   RaisedButton,
+  Icon,
   Touchable,
+  MaterialView,
   Paper,
 } from 'react-native-material';
 
@@ -30,42 +33,48 @@ export default class Example extends Component {
     super(props);
 
     this.state = {
-      elevation: 2,
+      elevation: new Animated.Value(2),
+      icon: 'hourglass-empty',
     };
   }
 
   componentDidMount() {
-    // setInterval(() => {
-    //   this.setState({
-    //     elevation: this.state.elevation+1
-    //   });
-    // }, 1000);
+    Animated.timing(this.state.elevation, {
+      toValue: 20,
+      duration: 500
+    }).start();
+
   }
-
-
-
-
 
   // <Paper elevation={5} style={{ backgroundColor: 'red', padding: 50 }}>
   //   <Text>Hello</Text>
   // </Paper>
 
-          // <FlatButton label="Normal" style={{ marginBottom: 20 }} onPress={() => {
-          //   console.log('onPress');
-          // } } />
-          // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
-          // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
-          // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
+  // <FlatButton label="Normal" style={{ marginBottom: 20 }} onPress={() => {
+  //   console.log('onPress');
+  // } } />
+  // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
+  // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+  // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
 
-          // <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
-          // <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
-          // <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
-          
+
   render() {
     return (
       <ThemeProvider>
         <View style={styles.container}>
-          <RaisedButton label="Normal"/>
+
+          <Icon name={this.state.icon} size={40} style={{marginBottom: 30, color: 'red'}}/>
+
+          <RaisedButton label="Normal" style={{ marginBottom: 20 }} />
+          <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
+          <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
+
+
+          <FlatButton label="Normal" style={{ marginBottom: 20 }} />
+          <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
+          <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
 
         </View>
       </ThemeProvider>

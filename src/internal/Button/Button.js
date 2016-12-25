@@ -19,6 +19,8 @@ export default class Button extends Component {
     label: PropTypes.string.isRequired,
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
+    onOnPressIn: PropTypes.func,
+    onOnPressOut: PropTypes.func,
     style: React.PropTypes.oneOfType([
       React.PropTypes.object,
       React.PropTypes.array
@@ -29,7 +31,11 @@ export default class Button extends Component {
   }
 
   onLayout(evt) {
-    console.log('evt.nativeEvent1', evt.nativeEvent);
+    // console.log('evt.nativeEvent1', evt.nativeEvent);
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('prop update', newProps.elevation);
   }
 
   render() {
@@ -39,9 +45,13 @@ export default class Button extends Component {
     let Inner = props.disabled ? View : Touchable;
     let Container = elevation ? Paper : View;
 
+    console.log('render elevation', elevation);
+
     return (
-      <Container style={[styles.container, props.style]} elevation={2} onLayout={this.onLayout.bind(this)}>
+      <Container style={[styles.container, props.style]} elevation={elevation} onLayout={this.onLayout.bind(this)}>
         <Inner
+          onPressIn={props.onPressIn}
+          onPressOut={props.onPressOut}
           onPress={props.onPress}
           onLongPress={props.onLongPress}
           style={[props.innerStyle]}
