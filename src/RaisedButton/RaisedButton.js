@@ -94,8 +94,9 @@ export default class RaisedButton extends Component {
     return (
       <Button 
         label={props.label}
-        style={[styles.container(theme, props), props.style]}
-        innerStyle={styles.innerStyle()}
+        containerStyle={[styles.container(theme, props), props.style]}
+        touchContainerStyle={styles.touchContainer(theme, props)}
+        touchInnerStyle={styles.touchInner()}
         labelStyle={styles.labelStyle(theme, props)}
         disabled={props.disabled}
         onPressIn={this.onPressIn.bind(this)}

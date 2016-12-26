@@ -10,12 +10,20 @@ export default {
         props.secondary ? theme.secondaryBackgroundColor :
           theme.backgroundColor;
 
-    return styles = {
+    return {
+      borderRadius: 2,
       backgroundColor: bgColor,
     };
   },
 
-  innerStyle: () => {
+  touchContainer: () => {
+    return {
+      borderRadius: 2,
+      overflow: 'hidden',
+    };
+  },
+
+  touchInner: () => {
     return {
       paddingLeft: 16,
       paddingRight: 16,

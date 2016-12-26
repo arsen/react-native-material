@@ -12,6 +12,7 @@ export default {
 
     return styles = {
       backgroundColor: bgColor,
+      borderRadius: 10,
     };
   },
 
@@ -19,8 +20,8 @@ export default {
     return {
       paddingLeft: 16,
       paddingRight: 16,
-      paddingTop: 8,
-      paddingBottom: 8,
+      paddingTop: 16,
+      paddingBottom: 16,
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row'

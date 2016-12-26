@@ -5,12 +5,9 @@ import Color from 'color';
 export default {
 
   container: {
-    // overflow: 'hidden',
-    borderRadius: 2,
   },
 
-  inner: {
-    borderRadius: 2,
+  touchInner: {
     overflow: 'hidden',
   },
   

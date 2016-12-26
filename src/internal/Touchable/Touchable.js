@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   Animated,
+  Text,
   TouchableWithoutFeedback,
 } from 'react-native';
 
@@ -16,8 +17,7 @@ export default class Touchable extends Component {
     onPressOut: () => { },
     overlayColor: 'rgba(0,0,0, 0.02)',
     rippleColor: 'rgba(0,0,0, 0.04)',
-    style: {},
-    containerStyle: {},
+    borderRadiusMask: 0,
   }
 
   constructor(props) {
@@ -26,7 +26,7 @@ export default class Touchable extends Component {
     this.state = {
       overlayOpacity: new Animated.Value(0),
       rippleScale: new Animated.Value(0),
-      rippleOpacity: new Animated.Value(20),
+      rippleOpacity: new Animated.Value(0),
       layout: { width: 0, height: 0 },
       touchPosition: {
         x: 0,
@@ -39,6 +39,7 @@ export default class Touchable extends Component {
   }
 
   onLayout(event) {
+    console.log('onLayout', event.nativeEvent);
     this.setState({
       layout: event.nativeEvent.layout
     });
@@ -97,9 +98,9 @@ export default class Touchable extends Component {
 
     let rippleStyles = {
       opacity: this.state.rippleOpacity,
+      backgroundColor: this.props.rippleColor,
       top: this.state.touchPosition.y,
       left: this.state.touchPosition.x,
-      backgroundColor: this.props.rippleColor,
       borderRadius: 1000,
       width: this.state.rippleScale,
       height: this.state.rippleScale,
@@ -114,35 +115,34 @@ export default class Touchable extends Component {
     }
 
     //android hack
-    let borderRadiusStyles = {};
-    if (this.props.containerStyle.borderRadius) {
-      borderRadiusStyles.borderRadius = this.props.containerStyle.borderRadius;
-    }
+    let borderRadiusStyles = {
+      borderRadius: this.props.borderRadiusMask
+    };
     return (
       <View
-        style={[styles.container, this.props.containerStyle]}
+        style={[styles.container, styles.fullSize, borderRadiusStyles]}
         onLayout={this.onLayout.bind(this)} >
-          <TouchableWithoutFeedback
-            onPress={this.props.onPress}
-            onLongPress={this.props.onLongPress}
-            onPressIn={(evt) => {
-              let touchPositionRelative = {
-                x: evt.nativeEvent.locationX,
-                y: evt.nativeEvent.locationY,
-              }
-              this.onTouchStart(touchPositionRelative);
-              this.props.onPressIn();
-            } }
-            onPressOut={(evt) => {
-              this.onTouchEnd();
-              this.props.onPressOut();
-            } } >
-            <View style={this.props.style}>
-              {this.props.children}
-            </View>
-          </TouchableWithoutFeedback>
-          <Animated.View style={[styles.overlay, overlayStyles, borderRadiusStyles]} pointerEvents="none"></Animated.View>
-          <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View>
+        <TouchableWithoutFeedback
+          onPress={this.props.onPress}
+          onLongPress={this.props.onLongPress}
+          onPressIn={(evt) => {
+            let touchPositionRelative = {
+              x: evt.nativeEvent.locationX,
+              y: evt.nativeEvent.locationY,
+            }
+            console.log('onPressIn', touchPositionRelative);
+            this.onTouchStart(touchPositionRelative);
+            this.props.onPressIn();
+          } }
+          onPressOut={(evt) => {
+            this.onTouchEnd();
+            this.props.onPressOut();
+          } } >
+          <View style={styles.fullSize}>
+            <Animated.View style={[styles.overlay, overlayStyles, borderRadiusStyles]} pointerEvents="none"></Animated.View>
+            <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     );
   }

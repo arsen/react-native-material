@@ -44,6 +44,18 @@ const RaisedButton = {
   disabledLabelColor: palette.disabledTextColor,
 };
 
+const IconButton = {
+  backgroundColor: palette.paperColor,
+  primaryBackgroundColor: palette.primaryColor,
+  secondaryBackgroundColor: palette.accentColor,
+  disabledBackgroundColor: palette.disabledColor,
+  
+  iconColor: palette.primaryTextColor,
+  primaryIconColor: palette.alternateTextColor,
+  secondaryIconColor: palette.alternateTextColor,
+  disabledIconColor: palette.disabledTextColor,
+};
+
 
 /**
  *  Light Theme is the default theme used. It is guaranteed to
@@ -53,5 +65,6 @@ const RaisedButton = {
 export default {
   palette,
   FlatButton,
-  RaisedButton
+  RaisedButton,
+  IconButton
 };

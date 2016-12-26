@@ -7,6 +7,15 @@ import {
 export default StyleSheet.create({
   container: {
     overflow: 'hidden',
+    // borderWidth: 1,
+  },
+
+  fullSize: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 
   overlay: {
@@ -22,7 +31,7 @@ export default StyleSheet.create({
     marginTop: -2,
     marginLeft: -2,
     position: 'absolute',
-    top: 0, 
+    top: 0,
     left: 0,
     right: 0,
     bottom: 0,
