@@ -1,4 +1,5 @@
 export {default as ThemeProvider} from './src/styles/ThemeProvider';
+export {default as Button} from './src/internal/Button';
 export {default as FlatButton} from './src/FlatButton';
 export {default as RaisedButton} from './src/RaisedButton';
 export {default as IconButton} from './src/IconButton';

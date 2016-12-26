@@ -15,6 +15,7 @@ export default class Touchable extends Component {
     onLongPress: null,
     onPressIn: () => { },
     onPressOut: () => { },
+    ripple: 'tap',
     overlayColor: 'rgba(0,0,0, 0.02)',
     rippleColor: 'rgba(0,0,0, 0.04)',
     borderRadiusMask: 0,
@@ -57,10 +58,15 @@ export default class Touchable extends Component {
       duration: 500
     }).start();
 
-    this.rippleSize = parseInt(
-      2 * Math.sqrt(Math.pow(this.state.layout.width, 2) +
-        Math.pow(this.state.layout.height, 2))
-    );
+    if (this.props.ripple === 'tap') {
+      this.rippleSize = parseInt(
+        2 * Math.sqrt(Math.pow(this.state.layout.width, 2) +
+          Math.pow(this.state.layout.height, 2))
+      );
+    }
+    else {
+      this.rippleSize = Math.min(this.state.layout.width, this.state.layout.height)
+    }
 
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
@@ -74,8 +80,9 @@ export default class Touchable extends Component {
       duration: 400,
     }).start();
 
+    let hideDelay = this.props.ripple === 'tap' ? 100 : 200;
     Animated.sequence([
-      Animated.delay(120),
+      Animated.delay(hideDelay),
       Animated.parallel([
         Animated.timing(this.state.overlayOpacity, {
           toValue: 0,
@@ -92,15 +99,13 @@ export default class Touchable extends Component {
 
   render() {
     let overlayStyles = {
-      opacity: this.state.overlayOpacity,
+      opacity: this.props.ripple === 'tap' ? this.state.overlayOpacity : 0,
       backgroundColor: this.props.overlayColor,
     };
 
     let rippleStyles = {
       opacity: this.state.rippleOpacity,
       backgroundColor: this.props.rippleColor,
-      top: this.state.touchPosition.y,
-      left: this.state.touchPosition.x,
       borderRadius: 1000,
       width: this.state.rippleScale,
       height: this.state.rippleScale,
@@ -112,6 +117,16 @@ export default class Touchable extends Component {
         inputRange: [0, this.rippleSize],
         outputRange: [0, -1 * (this.rippleSize / 2)]
       }),
+    };
+
+    if (this.props.ripple === 'tap') {
+      rippleStyles.top = this.state.touchPosition.y;
+      rippleStyles.left = this.state.touchPosition.x;
+
+    }
+    else {
+      rippleStyles.top = this.state.layout.height / 2;
+      rippleStyles.left = this.state.layout.width / 2;
     }
 
     //android hack

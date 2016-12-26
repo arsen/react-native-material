@@ -6,19 +6,5 @@ export default {
 
   container: {
   },
-
-  touchInner: {
-    overflow: 'hidden',
-  },
   
-  rippleColor: (props) => {
-    let color = props.labelStyle && props.labelStyle.color ?  props.labelStyle.color : '#000000';
-    return Color(color).fade(0.9).rgb().toString();
-  },
-
-  overlayColor: (props) => {
-    let color = props.labelStyle && props.labelStyle.color ?  props.labelStyle.color : '#000000';
-    return Color(color).fade(0.95).rgb().toString();
-  },
-
 };
