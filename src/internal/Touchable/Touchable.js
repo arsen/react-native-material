@@ -26,7 +26,7 @@ export default class Touchable extends Component {
 
     this.state = {
       overlayOpacity: new Animated.Value(0),
-      rippleScale: new Animated.Value(0),
+      rippleScale: new Animated.Value(10),
       rippleOpacity: new Animated.Value(0),
       layout: { width: 0, height: 0 },
       touchPosition: {

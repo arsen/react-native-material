@@ -66,7 +66,6 @@ const IconButton = {
   iconColor: palette.primaryTextColor,
   rippleColor: Color(palette.primaryTextColor).fade(0.9).rgb().toString(),
   disabled: {
-    backgroundColor: palette.disabledColor,
     iconColor: palette.disabledTextColor,
   }
 };

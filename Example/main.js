@@ -86,7 +86,8 @@ export default class Example extends Component {
     return (
       <ThemeProvider>
         <View style={styles.container}>
-          <IconButton icon="language" style={{ marginBottom: 20, color: 'red', fontSize: 65 }} />
+          <IconButton icon="language" style={{ marginBottom: 20,color: 'red', fontSize: 65 }} />
+          <IconButton icon="language" disabled={true} style={{ marginBottom: 20, color: 'red', fontSize: 65 }} />
         </View>
       </ThemeProvider>
     );

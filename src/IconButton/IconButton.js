@@ -59,7 +59,7 @@ export default class RaisedButton extends Component {
 
 
   render() {
-    const theme = this.context.theme.RaisedButton;
+    const theme = this.context.theme.IconButton;
     const props = this.props;
     let styles = iconButtonStyles(theme, props);
     return (

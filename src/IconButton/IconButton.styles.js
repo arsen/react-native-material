@@ -13,17 +13,19 @@ export default (theme, props) => {
   if (!iconColor) {
     iconColor = theme.iconColor;
   }
-  if (! backgroundColor) {
+  if (!backgroundColor) {
     backgroundColor = theme.backgroundColor;
   }
-  if (! rippleColor) {
+  if (!rippleColor) {
     rippleColor = theme.rippleColor;
   }
 
   let externalStyles = Array.isArray(props.style) ? StyleSheet.flatten(props.style) : props.style;
   if (externalStyles.color) {
-    rippleColor = Color(externalStyles.color).fade(0.95).rgb().toString();
-    iconColor = externalStyles.color;
+    if (!props.disabled) {
+      rippleColor = Color(externalStyles.color).fade(0.95).rgb().toString();
+      iconColor = externalStyles.color;
+    }
     delete externalStyles.color;
   }
   let fontSize = 14;
