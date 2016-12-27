@@ -50,9 +50,7 @@ export default class Example extends Component {
 
 
 
-  // <FlatButton label="Normal" style={{ marginBottom: 20 }} onPress={() => {
-  //   console.log('onPress');
-  // } } />
+
   // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
   // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
   // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
@@ -70,33 +68,44 @@ export default class Example extends Component {
   // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
   // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
   // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
-          // <Paper elevation={5} style={{ backgroundColor: '#fff', padding: 50, borderRadius: 2, }}>
+  // <Paper elevation={5} style={{ backgroundColor: '#fff', padding: 50, borderRadius: 2, }}>
+  //   <Text>Hello</Text>
+  //   <Touchable borderRadiusMask={2}></Touchable>
+  // </Paper>
+
+          //   <Button style={{
+          //   padding: 10,
+          //   borderRadius: 2
+          // }}
+          //   rippleColor='rgba(33, 150, 243, 0.2)'
+          //   overlayColor='rgba(33, 150, 243, 0.1)'
+          //   >
           //   <Text>Hello</Text>
-          //   <Touchable borderRadiusMask={2}></Touchable>
-          // </Paper>
+          // </Button>
+
+          // <Button style={{
+          //   padding: 10,
+          //   borderRadius: 2,
+          // }}
+          //   ripple="center"
+          //   rippleColor='rgba(33, 150, 243, 0.2)'
+          //   overlayColor='rgba(33, 150, 243, 0.1)'
+          //   >
+          //   <Icon name="check-circle" size={20} style={{ color: "#2196F3" }} />
+          // </Button>
 
   render() {
     return (
       <ThemeProvider>
         <View style={styles.container}>
-          
-          <Button style={{
-            padding: 10,
-            borderRadius: 2
-          }}>
-            <Text>Hello</Text>
-          </Button>
 
-          <Button style={{
-            padding: 15,
-            borderRadius: 2
-          }}
-          ripple="center"
-          rippleColor='rgba(33, 150, 243, 0.2)'
-          rippleColor='rgba(33, 150, 243, 0.1)'
-          >
-            <Icon name="check-circle" size={20} style={{color: "#2196F3"}}/>
-          </Button>
+          <FlatButton label="Normal" style={{ marginBottom: 20 }} />
+          <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }}  />
+          <FlatButton label="ICON" primary={true}  iconRight="volume-up" style={{ marginBottom: 20 }} />
+          <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
+
+
 
         </View>
       </ThemeProvider>

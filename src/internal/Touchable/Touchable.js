@@ -5,6 +5,7 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
+import Color from 'color';
 
 import styles from './Touchable.styles';
 
@@ -16,7 +17,6 @@ export default class Touchable extends Component {
     onPressIn: () => { },
     onPressOut: () => { },
     ripple: 'tap',
-    overlayColor: 'rgba(0,0,0, 0.02)',
     rippleColor: 'rgba(0,0,0, 0.04)',
     borderRadiusMask: 0,
   }
@@ -64,7 +64,7 @@ export default class Touchable extends Component {
           Math.pow(this.state.layout.height, 2))
       );
     }
-    else {
+    else if (this.props.ripple === 'center') {
       this.rippleSize = Math.min(this.state.layout.width, this.state.layout.height)
     }
 
@@ -96,12 +96,21 @@ export default class Touchable extends Component {
     ]).start();
   }
 
+  getOverlayColor() {
+    return this.props.overlayColor ?
+      this.props.overlayColor :
+      Color(this.props.rippleColor).fade(0.5).rgb().toString()
+  }
 
   render() {
+
     let overlayStyles = {
-      opacity: this.props.ripple === 'tap' ? this.state.overlayOpacity : 0,
-      backgroundColor: this.props.overlayColor,
+      opacity: this.state.overlayOpacity,
+      backgroundColor: this.getOverlayColor(),
     };
+    if (this.props.ripple === 'center') {
+      overlayStyles.opacity = 0;
+    }
 
     let rippleStyles = {
       opacity: this.state.rippleOpacity,
@@ -145,7 +154,6 @@ export default class Touchable extends Component {
               x: evt.nativeEvent.locationX,
               y: evt.nativeEvent.locationY,
             }
-            console.log('onPressIn', touchPositionRelative);
             this.onTouchStart(touchPositionRelative);
             this.props.onPressIn();
           } }
@@ -155,7 +163,7 @@ export default class Touchable extends Component {
           } } >
           <View style={styles.fullSize}>
             <Animated.View style={[styles.overlay, overlayStyles, borderRadiusStyles]} pointerEvents="none"></Animated.View>
-            <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View>
+            {this.props.ripple ? <Animated.View style={[styles.ripple, rippleStyles]} pointerEvents="none"></Animated.View> : false}
           </View>
         </TouchableWithoutFeedback>
       </View>

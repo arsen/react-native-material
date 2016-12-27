@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {
+  StyleSheet,
   View,
   Text,
 } from 'react-native';
@@ -37,14 +38,15 @@ export default class Button extends Component {
   render() {
     const props = this.props;
     let elevation = props.elevation && !props.disabled ? props.elevation : 0;
-    let Touch = props.disabled ? null : Touchable;
+    let Touch = props.disabled ? View : Touchable;
     let Container = elevation ? Paper : View;
 
+    let flattenStyles = Array.isArray(props.style) ? StyleSheet.flatten(props.style) : props.style;
     return (
       <Container style={props.style} elevation={elevation}>
         {props.children}
         <Touch
-          borderRadiusMask={props.style.borderRadius || 0}
+          borderRadiusMask={flattenStyles && flattenStyles.borderRadius ?  flattenStyles.borderRadius : 0}
           onPressIn={props.onPressIn}
           onPressOut={props.onPressOut}
           onPress={props.onPress}

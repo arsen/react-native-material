@@ -8,28 +8,40 @@ import {
 
 
 const palette = {
-    paperColor: white,
-    disabledColor: Color(black).fade(0.8).rgb().toString(),
-    primaryColor: cyan500,
-    primaryColorLight: cyan400,
-    primaryColorDark: cyan700,
-    accentColor: pinkA200,
-    accentColorLight: pinkA100,
-    accentColorDark: pinkA400,
+  paperColor: white,
+  disabledColor: Color(black).fade(0.8).rgb().toString(),
+  primaryColor: cyan500,
+  primaryColorLight: cyan400,
+  primaryColorDark: cyan700,
+  accentColor: pinkA200,
+  accentColorLight: pinkA100,
+  accentColorDark: pinkA400,
 
-    primaryTextColor: Color(black).fade(0.13).rgb().toString(),
-    secondaryTextColor: Color(black).fade(0.46).rgb().toString(),
-    disabledTextColor: Color(black).fade(0.62).rgb().toString(),
-    alternateTextColor: white,
-    transparent: transparent,
+  primaryTextColor: Color(black).fade(0.13).rgb().toString(),
+  secondaryTextColor: Color(black).fade(0.46).rgb().toString(),
+  disabledTextColor: Color(black).fade(0.62).rgb().toString(),
+  alternateTextColor: white,
+  transparent: transparent,
 };
 
 const FlatButton = {
   backgroundColor: palette.transparent,
   labelColor: palette.primaryTextColor,
-  primaryLabelColor: palette.primaryColor,
-  secondaryLabelColor: palette.accentColor,
-  disabledLabelColor: palette.disabledTextColor,
+  rippleColor: Color(palette.primaryTextColor).fade(0.9).rgb().toString(),
+  overlayColor: Color(palette.primaryTextColor).fade(0.95).rgb().toString(),
+  primary: {
+    labelColor: palette.primaryColor,
+    rippleColor: Color(palette.primaryColor).fade(0.92).rgb().toString(),
+    overlayColor: Color(palette.primaryColor).fade(0.97).rgb().toString(),
+  },
+  secondary: {
+    labelColor: palette.accentColor,
+    rippleColor: Color(palette.accentColor).fade(0.92).rgb().toString(),
+    overlayColor: Color(palette.accentColor).fade(0.97).rgb().toString(),
+  },
+  disabled: {
+    labelColor: palette.disabledTextColor,
+  }
 };
 
 const RaisedButton = {
@@ -37,7 +49,7 @@ const RaisedButton = {
   primaryBackgroundColor: palette.primaryColor,
   secondaryBackgroundColor: palette.accentColor,
   disabledBackgroundColor: palette.disabledColor,
-  
+
   labelColor: palette.primaryTextColor,
   primaryLabelColor: palette.alternateTextColor,
   secondaryLabelColor: palette.alternateTextColor,
@@ -49,7 +61,7 @@ const IconButton = {
   primaryBackgroundColor: palette.primaryColor,
   secondaryBackgroundColor: palette.accentColor,
   disabledBackgroundColor: palette.disabledColor,
-  
+
   iconColor: palette.primaryTextColor,
   primaryIconColor: palette.alternateTextColor,
   secondaryIconColor: palette.alternateTextColor,
