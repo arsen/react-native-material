@@ -1,2 +1,2 @@
-import component from './IconButton';
+import component from './RaisedButton';
 export default component;

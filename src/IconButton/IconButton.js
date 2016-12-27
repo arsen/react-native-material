@@ -6,13 +6,14 @@ import {
 } from 'react-native';
 
 import Button from '../internal/Button';
+import Icon from '../Icon';
 
-import styles from './IconButton.styles';
+import iconButtonStyles from './IconButton.styles';
 
 /**
- * FlatButton Component.
+ * RaisedButton Component.
  */
-export default class IconButton extends Component {
+export default class RaisedButton extends Component {
   constructor(props) {
     super(props);
   }
@@ -23,7 +24,7 @@ export default class IconButton extends Component {
 
   static propTypes = {
     /**
-     * Label for the button.
+     * Icon name for the button.
      */
     icon: PropTypes.string.isRequired,
 
@@ -43,43 +44,34 @@ export default class IconButton extends Component {
     style: PropTypes.object,
 
     /**
-     * If true, colors button according to primary color from the Theme
-     */
-    primary: PropTypes.bool,
-
-    /**
-     * If true, colors button according to secondary color from the Theme
-     */
-    secondary: PropTypes.bool,
-
-    /**
      * 	Disables the button if set to true.
      */
     disabled: PropTypes.bool,
+
   }
 
   static defaultProps = {
     onPress: () => { },
     onLongPress: null,
     style: {},
-    primary: false,
-    secondary: false,
-    disabled: false,
+    disabled: false
   }
 
+
   render() {
-    const theme = this.context.theme.IconButton;
+    const theme = this.context.theme.RaisedButton;
     const props = this.props;
+    let styles = iconButtonStyles(theme, props);
     return (
-      <Button 
-        icon={props.icon}
-        style={[styles.container(theme, props), props.style]}
-        innerStyle={styles.innerStyle()}
-        labelStyle={styles.labelStyle(theme, props)}
-        disabled={props.disabled}
+      <Button
+        style={[styles.sheet.container, props.style]}
+        ripple={'center'}
+        rippleColor={styles.ripple}
         onPress={props.onPress}
         onLongPress={props.onLongPress}
-      />
+        disabled={props.disabled} >
+        <Icon name={this.props.icon} style={styles.sheet.icon} />
+      </Button>
     );
   }
 }

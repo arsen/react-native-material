@@ -80,7 +80,7 @@ export default class Touchable extends Component {
       duration: 400,
     }).start();
 
-    let hideDelay = this.props.ripple === 'tap' ? 100 : 200;
+    let hideDelay = this.props.ripple === 'tap' ? 100 : 250;
     Animated.sequence([
       Animated.delay(hideDelay),
       Animated.parallel([

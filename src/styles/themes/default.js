@@ -63,22 +63,15 @@ const RaisedButton = {
 
 const IconButton = {
   backgroundColor: palette.paperColor,
-  primaryBackgroundColor: palette.primaryColor,
-  secondaryBackgroundColor: palette.accentColor,
-  disabledBackgroundColor: palette.disabledColor,
-
   iconColor: palette.primaryTextColor,
-  primaryIconColor: palette.alternateTextColor,
-  secondaryIconColor: palette.alternateTextColor,
-  disabledIconColor: palette.disabledTextColor,
+  rippleColor: Color(palette.primaryTextColor).fade(0.9).rgb().toString(),
+  disabled: {
+    backgroundColor: palette.disabledColor,
+    iconColor: palette.disabledTextColor,
+  }
 };
 
 
-/**
- *  Light Theme is the default theme used. It is guaranteed to
- *  have all theme variables needed for every component. Variables not defined
- *  in a custom theme will default to these values.
- */
 export default {
   palette,
   FlatButton,
