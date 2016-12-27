@@ -77,7 +77,7 @@ export default class Touchable extends Component {
   onTouchEnd() {
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
-      duration: 400,
+      duration: 300,
     }).start();
 
     let hideDelay = this.props.ripple === 'tap' ? 100 : 250;

@@ -3,6 +3,7 @@ export {default as Button} from './src/internal/Button';
 export {default as FlatButton} from './src/FlatButton';
 export {default as RaisedButton} from './src/RaisedButton';
 export {default as IconButton} from './src/IconButton';
+export {default as FloatingActionButton} from './src/FloatingActionButton';
 export {default as Icon} from './src/Icon';
 export {default as Touchable} from './src/internal/Touchable';
 export {default as Paper} from './src/internal/Paper';

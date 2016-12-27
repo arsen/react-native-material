@@ -71,9 +71,17 @@ const IconButton = {
 };
 
 
+const FloatingActionButton = {
+  backgroundColor: palette.accentColor,
+  iconColor: palette.alternateTextColor,
+  rippleColor: Color(palette.alternateTextColor).fade(0.85).rgb().toString(),
+};
+
+
 export default {
   palette,
   FlatButton,
   RaisedButton,
-  IconButton
+  IconButton,
+  FloatingActionButton
 };
