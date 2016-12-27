@@ -81,7 +81,7 @@ export default class Example extends Component {
       <ThemeProvider>
         <View style={styles.container}>
           <RaisedButton label="Normal" style={{ marginBottom: 20 }} />
-          <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20 }}  />
+          <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20, position: 'absolute', top: 40, left: 20 }}  />
           <RaisedButton label="ICON" primary={true}  iconRight="volume-up" style={{ marginBottom: 20 }} />
           <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
           <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
