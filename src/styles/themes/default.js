@@ -28,16 +28,13 @@ const FlatButton = {
   backgroundColor: palette.transparent,
   labelColor: palette.primaryTextColor,
   rippleColor: Color(palette.primaryTextColor).fade(0.9).rgb().toString(),
-  overlayColor: Color(palette.primaryTextColor).fade(0.95).rgb().toString(),
   primary: {
     labelColor: palette.primaryColor,
     rippleColor: Color(palette.primaryColor).fade(0.92).rgb().toString(),
-    overlayColor: Color(palette.primaryColor).fade(0.97).rgb().toString(),
   },
   secondary: {
     labelColor: palette.accentColor,
     rippleColor: Color(palette.accentColor).fade(0.92).rgb().toString(),
-    overlayColor: Color(palette.accentColor).fade(0.97).rgb().toString(),
   },
   disabled: {
     labelColor: palette.disabledTextColor,
@@ -46,14 +43,22 @@ const FlatButton = {
 
 const RaisedButton = {
   backgroundColor: palette.paperColor,
-  primaryBackgroundColor: palette.primaryColor,
-  secondaryBackgroundColor: palette.accentColor,
-  disabledBackgroundColor: palette.disabledColor,
-
   labelColor: palette.primaryTextColor,
-  primaryLabelColor: palette.alternateTextColor,
-  secondaryLabelColor: palette.alternateTextColor,
-  disabledLabelColor: palette.disabledTextColor,
+  rippleColor: Color(palette.primaryTextColor).fade(0.97).rgb().toString(),
+  primary: {
+    backgroundColor: palette.primaryColor,
+    labelColor: palette.alternateTextColor,
+    rippleColor: Color(palette.alternateTextColor).fade(0.85).rgb().toString(),
+  },
+  secondary: {
+    backgroundColor: palette.accentColor,
+    labelColor: palette.alternateTextColor,
+    rippleColor: Color(palette.alternateTextColor).fade(0.85).rgb().toString(),
+  },
+  disabled: {
+    backgroundColor: palette.disabledColor,
+    labelColor: palette.disabledTextColor,
+  },
 };
 
 const IconButton = {

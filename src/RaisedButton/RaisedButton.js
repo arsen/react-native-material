@@ -6,17 +6,19 @@ import {
 } from 'react-native';
 
 import Button from '../internal/Button';
+import Icon from '../Icon';
 
 import styles from './RaisedButton.styles';
 
 /**
- * FlatButton Component.
+ * RaisedButton Component.
  */
 export default class RaisedButton extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      elevation: new Animated.Value(2),
+      elevation: new Animated.Value(2)
     }
   }
 
@@ -29,6 +31,16 @@ export default class RaisedButton extends Component {
      * Label for the button.
      */
     label: PropTypes.string.isRequired,
+
+    /**
+     * Include icon from left side
+     */
+    iconLeft: PropTypes.string,
+
+    /**
+     * Include icon from right side
+     */
+    iconRight: PropTypes.string,
 
     /**
      * Callback function when button is pressed.
@@ -59,6 +71,7 @@ export default class RaisedButton extends Component {
      * 	Disables the button if set to true.
      */
     disabled: PropTypes.bool,
+
   }
 
   static defaultProps = {
@@ -68,20 +81,41 @@ export default class RaisedButton extends Component {
     labelStyle: {},
     primary: false,
     secondary: false,
-    disabled: false,
+    disabled: false
+  }
+
+  getIconLeft(style) {
+    if (!this.props.iconLeft) {
+      return null;
+    }
+    let styleList = [style.sheet.icon];
+    if (this.props.label && this.props.label !== '') {
+      styleList.push(style.sheet.iconLeft);
+    }
+    styleList.push(this.props.labelStyle);
+    return <Icon name={this.props.iconLeft} style={styleList} />
+  }
+
+  getIconRight(style) {
+    if (!this.props.iconRight) {
+      return null;
+    }
+    let styleList = [style.sheet.icon];
+    if (this.props.label && this.props.label !== '') {
+      styleList.push(style.sheet.iconRight);
+    }
+    styleList.push(this.props.labelStyle);
+    return <Icon name={this.props.iconRight} style={styleList} />
   }
 
   onPressIn() {
-    console.log('press in');
     Animated.timing(this.state.elevation, {
       toValue: 4,
       duration: 200
     }).start();
-
   }
 
   onPressOut() {
-    console.log('press out');
     Animated.timing(this.state.elevation, {
       toValue: 2,
       duration: 200
@@ -91,20 +125,23 @@ export default class RaisedButton extends Component {
   render() {
     const theme = this.context.theme.RaisedButton;
     const props = this.props;
+    let style = styles(theme, props);
     return (
-      <Button 
-        label={props.label}
-        containerStyle={[styles.container(theme, props), props.style]}
-        touchContainerStyle={styles.touchContainer(theme, props)}
-        touchInnerStyle={styles.touchInner()}
-        labelStyle={styles.labelStyle(theme, props)}
-        disabled={props.disabled}
-        onPressIn={this.onPressIn.bind(this)}
-        onPressOut={this.onPressOut.bind(this)}
+      <Button
+        style={[style.sheet.container, props.style]}
+        rippleColor={style.ripple}
         onPress={props.onPress}
         onLongPress={props.onLongPress}
-        elevation={this.state.elevation}
-      />
+        onPressIn={this.onPressIn.bind(this)}
+        onPressOut={this.onPressOut.bind(this)}
+        disabled={props.disabled}
+        elevation={this.state.elevation}>
+        {this.getIconLeft(style)}
+        <Text style={[style.sheet.label, props.labelStyle]}>
+          {props.label}
+        </Text>
+        {this.getIconRight(style)}
+      </Button>
     );
   }
 }

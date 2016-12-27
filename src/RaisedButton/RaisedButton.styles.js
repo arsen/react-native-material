@@ -2,49 +2,53 @@ import { StyleSheet, Dimensions, Platform } from 'react-native';
 import deepAssign from 'deep-assign';
 import Color from 'color';
 
-export default {
 
-  container: (theme, props) => {
-    let bgColor = props.disabled ? theme.disabledBackgroundColor :
-      props.primary ? theme.primaryBackgroundColor :
-        props.secondary ? theme.secondaryBackgroundColor :
-          theme.backgroundColor;
+import { getStateStyles } from '../styles/helper';
 
-    return {
-      borderRadius: 2,
-      backgroundColor: bgColor,
-    };
-  },
 
-  touchContainer: () => {
-    return {
-      borderRadius: 2,
-      overflow: 'hidden',
-    };
-  },
 
-  touchInner: () => {
-    return {
-      paddingLeft: 16,
-      paddingRight: 16,
-      paddingTop: 8,
-      paddingBottom: 8,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row'
-    };
-  },
+export default (theme, props) => {
 
-  labelStyle: (theme, props) => {
-    let color = props.disabled ? theme.disabledLabelColor :
-      props.primary ? theme.primaryLabelColor :
-        props.secondary ? theme.secondaryLabelColor :
-          theme.labelColor;
+  let { labelColor, backgroundColor, rippleColor } = getStateStyles(theme, props);
+  if (!labelColor) {
+    labelColor = theme.labelColor;
+  }
+  if (! backgroundColor) {
+    backgroundColor = theme.backgroundColor;
+  }
+  if (! rippleColor) {
+    rippleColor = theme.rippleColor;
+  }
+  
 
-    let styles = {
-      fontSize: 14,
-      color: color,
-    };
-    return deepAssign(styles, props.labelStyle);
-  },
+  return {
+    ripple: rippleColor,
+    sheet: StyleSheet.create({
+      container: {
+        borderRadius: 2,
+        backgroundColor: backgroundColor,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 8,
+        paddingBottom: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+      },
+      icon: {
+        fontSize: 14,
+        color: labelColor,
+      },
+      iconLeft: {
+        marginRight: 5,
+      },
+      iconRight: {
+        marginLeft: 5,
+      },
+      label: {
+        fontSize: 14,
+        color: labelColor,
+      },
+    })
+  };
 };

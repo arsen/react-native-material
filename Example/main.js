@@ -49,30 +49,6 @@ export default class Example extends Component {
   }
 
 
-
-
-  // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
-  // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
-  // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
-
-
-  // <IconButton icon={"hourglass-empty"} style={{marginBottom: 30, width: 200,}} />
-
-  // <RaisedButton label="Normal" style={{ marginBottom: 20, width: 200, height: 100 }} />
-  // <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
-  // <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
-  // <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
-
-
-  // <FlatButton label="Normal" style={{ marginBottom: 20 }} />
-  // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }} />
-  // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
-  // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
-  // <Paper elevation={5} style={{ backgroundColor: '#fff', padding: 50, borderRadius: 2, }}>
-  //   <Text>Hello</Text>
-  //   <Touchable borderRadiusMask={2}></Touchable>
-  // </Paper>
-
           //   <Button style={{
           //   padding: 10,
           //   borderRadius: 2
@@ -94,19 +70,21 @@ export default class Example extends Component {
           //   <Icon name="check-circle" size={20} style={{ color: "#2196F3" }} />
           // </Button>
 
+          // <FlatButton label="Normal" style={{ marginBottom: 20 }} />
+          // <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }}  />
+          // <FlatButton label="ICON" primary={true}  iconRight="volume-up" style={{ marginBottom: 20 }} />
+          // <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          // <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
+
   render() {
     return (
       <ThemeProvider>
         <View style={styles.container}>
-
-          <FlatButton label="Normal" style={{ marginBottom: 20 }} />
-          <FlatButton label="Primary" primary={true} style={{ marginBottom: 20 }}  />
-          <FlatButton label="ICON" primary={true}  iconRight="volume-up" style={{ marginBottom: 20 }} />
-          <FlatButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
-          <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
-
-
-
+          <RaisedButton label="Normal" style={{ marginBottom: 20 }} />
+          <RaisedButton label="Primary" primary={true} style={{ marginBottom: 20 }}  />
+          <RaisedButton label="ICON" primary={true}  iconRight="volume-up" style={{ marginBottom: 20 }} />
+          <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 20 }} />
+          <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
         </View>
       </ThemeProvider>
     );

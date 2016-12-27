@@ -9,20 +9,17 @@ import { getStateStyles } from '../styles/helper';
 
 export default (theme, props) => {
 
-  let { labelColor, rippleColor, overlayColor } = getStateStyles(theme, props);
+  let { labelColor, rippleColor } = getStateStyles(theme, props);
   if (!labelColor) {
     labelColor = theme.labelColor;
   }
   if (! rippleColor) {
     rippleColor = theme.rippleColor;
   }
-  if (! overlayColor) {
-    overlayColor = theme.overlayColor;
-  }
+  
 
   return {
     ripple: rippleColor,
-    overlay: overlayColor,
     sheet: StyleSheet.create({
       container: {
         borderRadius: 2,
