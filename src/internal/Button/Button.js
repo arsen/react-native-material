@@ -22,6 +22,7 @@ export default class Button extends Component {
     onLongPress: PropTypes.func,
     onOnPressIn: PropTypes.func,
     onOnPressOut: PropTypes.func,
+    onRippleDone: PropTypes.func,
     style: React.PropTypes.oneOfType([
       React.PropTypes.object,
       React.PropTypes.array
@@ -33,6 +34,7 @@ export default class Button extends Component {
     ]),
     overlayColor: PropTypes.string,
     rippleColor: PropTypes.string,
+    onLayout: PropTypes.func,
   }
 
   render() {
@@ -43,7 +45,7 @@ export default class Button extends Component {
 
     let flattenStyles = Array.isArray(props.style) ? StyleSheet.flatten(props.style) : props.style;
     return (
-      <Container style={props.style} elevation={elevation}>
+      <Container style={props.style} elevation={elevation} onLayout={props.onLayout}>
         {props.children}
         <Touch
           borderRadiusMask={flattenStyles && flattenStyles.borderRadius ?  flattenStyles.borderRadius : 0}
@@ -53,6 +55,7 @@ export default class Button extends Component {
           onLongPress={props.onLongPress}
           ripple={props.ripple} 
           rippleColor={props.rippleColor}
+          onRippleDone={props.onRippleDone}
           overlayColor={props.overlayColor}>
           </Touch>
       </Container>

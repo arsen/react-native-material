@@ -15,7 +15,8 @@ export default class Paper extends Component {
   static propTypes = {
     style: React.PropTypes.oneOfType([
       React.PropTypes.object,
-      React.PropTypes.array
+      React.PropTypes.array,
+      React.PropTypes.number
     ]),
     onLayout: React.PropTypes.func
   }

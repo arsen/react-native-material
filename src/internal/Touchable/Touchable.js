@@ -16,6 +16,8 @@ export default class Touchable extends Component {
     onLongPress: null,
     onPressIn: () => { },
     onPressOut: () => { },
+    onRippleDone: () => { },
+    onLayout: () => { },
     ripple: 'tap',
     rippleColor: 'rgba(0,0,0, 0.04)',
     borderRadiusMask: 0,
@@ -26,7 +28,7 @@ export default class Touchable extends Component {
 
     this.state = {
       overlayOpacity: new Animated.Value(0),
-      rippleScale: new Animated.Value(10),
+      rippleScale: new Animated.Value(20),
       rippleOpacity: new Animated.Value(0),
       layout: { width: 0, height: 0 },
       touchPosition: {
@@ -40,7 +42,7 @@ export default class Touchable extends Component {
   }
 
   onLayout(event) {
-    console.log('onLayout', event.nativeEvent);
+    this.props.onLayout(event);
     this.setState({
       layout: event.nativeEvent.layout
     });
@@ -55,7 +57,7 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.overlayOpacity, {
       toValue: 1,
-      duration: 500
+      duration: this.props.ripple === 'center' ? 300 : 500
     }).start();
 
     if (this.props.ripple === 'tap') {
@@ -70,17 +72,21 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
-      duration: 700
+      duration: this.props.ripple === 'center' ? 500 : 700
     }).start();
   }
 
   onTouchEnd() {
+    let rippleDuration = this.props.ripple === 'tap' ? 
+      (this.rippleSize - this.state.rippleScale._value) / 0.4 :
+      (this.rippleSize - this.state.rippleScale._value) / 0.15;
+      
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
-      duration: 300,
+      duration: rippleDuration,
     }).start();
 
-    let hideDelay = this.props.ripple === 'tap' ? 100 : 250;
+    let hideDelay = this.props.ripple === 'tap' ? rippleDuration / 3 : rippleDuration;
     Animated.sequence([
       Animated.delay(hideDelay),
       Animated.parallel([
@@ -93,7 +99,9 @@ export default class Touchable extends Component {
           duration: 200
         })
       ])
-    ]).start();
+    ]).start(() => {
+      this.props.onRippleDone();
+    });
   }
 
   getOverlayColor() {

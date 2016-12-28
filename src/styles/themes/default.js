@@ -44,7 +44,7 @@ const FlatButton = {
 const RaisedButton = {
   backgroundColor: palette.paperColor,
   labelColor: palette.primaryTextColor,
-  rippleColor: Color(palette.primaryTextColor).fade(0.97).rgb().toString(),
+  rippleColor: Color(palette.primaryTextColor).fade(0.94).rgb().toString(),
   primary: {
     backgroundColor: palette.primaryColor,
     labelColor: palette.alternateTextColor,
@@ -74,7 +74,7 @@ const IconButton = {
 const FloatingActionButton = {
   backgroundColor: palette.accentColor,
   iconColor: palette.alternateTextColor,
-  rippleColor: Color(palette.alternateTextColor).fade(0.85).rgb().toString(),
+  rippleColor: Color(palette.alternateTextColor).fade(0.80).rgb().toString(),
 };
 
 

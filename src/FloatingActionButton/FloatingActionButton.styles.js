@@ -29,24 +29,17 @@ export default (theme, props) => {
     iconSize = 14;
   }
 
-  let posStyles = {};
-  if (props.pos) {
-    posStyles.position = 'absolute';
-    posStyles = Object.assign(posStyles, props.pos);
-  }
 
   return {
     ripple: rippleColor,
     sheet: StyleSheet.create({
-      container: deepAssign({
-        borderRadius: 1000,
+      container: {
+        borderRadius: 500,
         backgroundColor,
-        width,
-        height,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
-      }, posStyles),
+      },
       icon: {
         fontSize: iconSize,
         color: iconColor,
