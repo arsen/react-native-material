@@ -62,7 +62,7 @@ const RaisedButton = {
 };
 
 const IconButton = {
-  backgroundColor: palette.paperColor,
+  backgroundColor: palette.transparent,
   iconColor: palette.primaryTextColor,
   rippleColor: Color(palette.primaryTextColor).fade(0.9).rgb().toString(),
   disabled: {

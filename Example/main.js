@@ -40,6 +40,7 @@ export default class Example extends Component {
 
     this.state = {
       elevation: 7,
+      height: new Animated.Value(450),
       style: {
         position: 'absolute',
         bottom: 150,
@@ -121,7 +122,17 @@ export default class Example extends Component {
       <ThemeProvider>
         <View style={styles.container}>
 
-          <RaisedButton label="Normal" style={{ marginBottom: 10 }} />
+        <Animated.View style={{
+          borderWidth: 0,
+          width: 350,
+          height: this.state.height,
+          justifyContent: 'center',
+          alignItems: 'center',
+
+        }}>
+          <RaisedButton label="Normal" style={{ marginBottom: 10 }} onPress={() => {
+            // this.state.height.setValue(600);
+          }}/>
           <RaisedButton label="Primary" primary={true} style={{ marginBottom: 10 }} />
           <RaisedButton label="Secondary" secondary={true} style={{ marginBottom: 10 }} />
           <RaisedButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
@@ -132,8 +143,12 @@ export default class Example extends Component {
           <FlatButton label="Disabled" disabled={true} style={{ marginBottom: 20 }} />
 
           <IconButton icon="favorite" style={{ marginBottom: 20 }} />
+        </Animated.View>
           
-          <FloatingActionButton icon="add" />
+          <FloatingActionButton icon="add" animate={true} toolbar={[]} position={{
+            right: 40,
+            bottom: 40
+          }}/>
 
         </View>
       </ThemeProvider>

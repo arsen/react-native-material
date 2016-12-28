@@ -28,7 +28,7 @@ export default (theme, props) => {
     }
     delete externalStyles.color;
   }
-  let fontSize = 14;
+  let fontSize = 18;
   if (externalStyles.fontSize) {
     fontSize = externalStyles.fontSize;
     delete externalStyles.fontSize;
@@ -40,7 +40,7 @@ export default (theme, props) => {
       container: deepAssign({
         borderRadius: 1000,
         backgroundColor: backgroundColor,
-        padding: 16,
+        padding: 12,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'

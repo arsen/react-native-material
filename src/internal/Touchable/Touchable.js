@@ -57,7 +57,7 @@ export default class Touchable extends Component {
 
     Animated.timing(this.state.overlayOpacity, {
       toValue: 1,
-      duration: this.props.ripple === 'center' ? 300 : 500
+      duration: this.props.ripple === 'center' ? 400 : 500
     }).start();
 
     if (this.props.ripple === 'tap') {
@@ -70,23 +70,23 @@ export default class Touchable extends Component {
       this.rippleSize = Math.min(this.state.layout.width, this.state.layout.height)
     }
 
+    
+
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
-      duration: this.props.ripple === 'center' ? 500 : 700
+      duration: this.props.ripple === 'center' ? 500 : 900
     }).start();
   }
 
   onTouchEnd() {
-    let rippleDuration = this.props.ripple === 'tap' ? 
-      (this.rippleSize - this.state.rippleScale._value) / 0.4 :
-      (this.rippleSize - this.state.rippleScale._value) / 0.15;
-      
+    let rippleDuration = 400 - (this.state.rippleScale._value / this.rippleSize) * 400;
+
     Animated.timing(this.state.rippleScale, {
       toValue: this.rippleSize,
       duration: rippleDuration,
     }).start();
 
-    let hideDelay = this.props.ripple === 'tap' ? rippleDuration / 3 : rippleDuration;
+    let hideDelay = this.props.ripple === 'tap' ? rippleDuration / 4 : rippleDuration / 1.5;
     Animated.sequence([
       Animated.delay(hideDelay),
       Animated.parallel([

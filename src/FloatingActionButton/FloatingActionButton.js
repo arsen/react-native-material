@@ -4,12 +4,17 @@ import {
   Text,
   Animated,
   Easing,
-  LayoutAnimation
+  LayoutAnimation,
+  UIManager,
+  StyleSheet
 } from 'react-native';
 
 import Button from '../internal/Button';
 import Paper from '../internal/Paper';
+import Touchable from '../internal/Touchable';
 import Icon from '../Icon';
+import FlatButton from '../FlatButton';
+import IconButton from '../IconButton';
 
 import buttonStyles from './FloatingActionButton.styles';
 
@@ -23,12 +28,13 @@ export default class FlatingActionButton extends Component {
     this.state = {
       elevation: new Animated.Value(3),
       scale: new Animated.Value(0),
-      toolbarAnimation: new Animated.Value(0),
-      toolbarVisible: false,
+      transformAnimation: new Animated.Value(0),
+      expanded: false,
     }
 
-    this.toolbarAnimationStyles = {};
     this.layout = null;
+    UIManager.setLayoutAnimationEnabledExperimental &&
+      UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
   static contextTypes = {
@@ -64,7 +70,7 @@ export default class FlatingActionButton extends Component {
     /**
      * Position of the button (if passed the position will set to 'absolute')
      */
-    pos: PropTypes.shape({
+    position: PropTypes.shape({
       top: PropTypes.number,
       left: PropTypes.number,
       bottom: PropTypes.number,
@@ -95,17 +101,21 @@ export default class FlatingActionButton extends Component {
 
 
   onPressIn() {
-    Animated.timing(this.state.elevation, {
-      toValue: 5,
-      duration: 200
-    }).start();
+    if (!this.state.expanded) {
+      Animated.timing(this.state.elevation, {
+        toValue: 5,
+        duration: 200
+      }).start();
+    }
   }
 
   onPressOut() {
-    Animated.timing(this.state.elevation, {
-      toValue: 3,
-      duration: 200
-    }).start();
+    if (!this.state.expanded) {
+      Animated.timing(this.state.elevation, {
+        toValue: 3,
+        duration: 200
+      }).start();
+    }
   }
 
   componentDidMount() {
@@ -116,153 +126,165 @@ export default class FlatingActionButton extends Component {
     }).start();
   }
 
-  getSize() {
-    if (this.props.mini) {
-      return {
-        width: 40,
-        height: 40,
-      }
-    }
-    else {
-      return {
-        width: 56,
-        height: 56,
-      }
-    }
-  }
-
-  getExtraStyles() {
-    let extraStyles = {};
+  getAppearAnimationStyles() {
+    let animateStyles = {};
     if (this.props.animate) {
-      extraStyles.transform = [
+      animateStyles.transform = [
         { scale: this.state.scale }
       ];
     }
-
-    if (this.props.pos) {
-      extraStyles.position = 'absolute';
-      extraStyles = Object.assign(extraStyles, this.props.pos);
-    }
-
-    extraStyles = Object.assign(extraStyles, this.getSize());
-
-    return extraStyles;
-  }
-
-  measureSize(event) {
-    // console.log('layout measure', event.nativeEvent.layout);
-  }
-
-  componentWillUpdate() {
-
-  }
-
-  transformToToolbar() {
-    let currLayout = Object.assign({}, this.layout);
-    // this.toolbarAnimationStyles = {
-    //   position: 'absolute',
-    //   left: this.state.toolbarAnimation.interpolate({
-    //     inputRange: [0, 100],
-    //     outputRange: [currLayout.x, 0]
-    //   }),
-    //   bottom: this.state.toolbarAnimation.interpolate({
-    //     inputRange: [0, 100],
-    //     outputRange: [20, 0]
-    //   }),
-    //   right: this.state.toolbarAnimation.interpolate({
-    //     inputRange: [0, 100],
-    //     outputRange: [20, 0]
-    //   }),
-    //   borderRadius: this.state.toolbarAnimation.interpolate({
-    //     inputRange: [0, 100],
-    //     outputRange: [500, 0],
-    //   }),
-    //   height: this.getSize().height,
-    // }
-
-    this.toolbarAnimationStyles = {};
-
-
-    setTimeout(() => {
-      LayoutAnimation.easeInEaseOut();
-      this.toolbarAnimationStyles = {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-      }
-      this.forceUpdate();
-    }, 2000)
-
-
-    //   let anim = {
-    //   duration: 1000,
-    //   create: {
-    //     type: LayoutAnimation.Types.spring,
-    //     property: LayoutAnimation.Properties.scaleXY,
-    //     springDamping: 0.7,
-    //   },
-    //   update: {
-    //     type: LayoutAnimation.Types.spring,
-    //     springDamping: 0.7,
-    //   },
-    // };
-    //    LayoutAnimation.configureNext(anim);
-
-    this.setState({
-      toolbarVisible: true
-    });
-
-    Animated.timing(this.state.toolbarAnimation, {
-      toValue: 100,
-      duration: 200
-    }).start();
+    return animateStyles;
   }
 
   onPress() {
     if (!this.props.toolbar) {
       this.props.onPress();
     }
+    else {
+      this.transform();
+    }
   }
+
+  transform() {
+    if (!this.props.toolbar) {
+      return;
+    }
+    let transformDuration = 150;
+    var CustomLayoutSpring = {
+      duration: transformDuration,
+      create: {
+        type: LayoutAnimation.Types.linear,
+        property: LayoutAnimation.Properties.scaleXY,
+      },
+      update: {
+        type: LayoutAnimation.Types.linear,
+      },
+    };
+    LayoutAnimation.configureNext(CustomLayoutSpring);
+    Animated.timing(this.state.transformAnimation, {
+      toValue: 100,
+      duration: transformDuration,
+    }).start();
+
+    this.state.elevation.setValue(0);
+
+    this.setState({
+      expanded: true
+    });
+  }
+
+  getContainerStyles(styles) {
+    if (!this.state.expanded) {
+      return [styles.sheet.container, this.getAppearAnimationStyles()];
+    }
+    else {
+      return [styles.sheet.containerToolbar, {
+        borderRadius: this.state.transformAnimation.interpolate({
+          inputRange: [0, 90],
+          outputRange: [26, 0]
+        })
+      }];
+    }
+  }
+
+  getContent(styles) {
+    if (this.state.expanded) {
+      return (
+        <Animated.View style={{
+          flexDirection: 'row',
+          opacity: this.state.transformAnimation.interpolate({
+            inputRange: [93, 100],
+            outputRange: [0, 1]
+          })
+        }}>
+          <IconButton icon="alarm-add" style={{ marginRight: 10 }} />
+          <IconButton icon="alarm-on" style={{ marginRight: 10 }} />
+          <IconButton icon="close" style={{ marginRight: 10 }} onPress={() => {
+            let transformDuration = 150;
+            var CustomLayoutSpring = {
+              duration: transformDuration,
+              create: {
+                type: LayoutAnimation.Types.linear,
+                property: LayoutAnimation.Properties.scaleXY,
+              },
+              update: {
+                type: LayoutAnimation.Types.linear,
+              },
+            };
+            LayoutAnimation.configureNext(CustomLayoutSpring);
+            Animated.timing(this.state.transformAnimation, {
+              toValue: 0,
+              duration: transformDuration,
+            }).start();
+            this.setState({
+              expanded: false
+            });
+          } } />
+        </Animated.View>
+      )
+    }
+  }
+
+
 
   render() {
     const theme = this.context.theme.FloatingActionButton;
     const props = this.props;
-    let styles = buttonStyles(theme, props);
+    let computedStyles = buttonStyles(theme, props);
 
-    let extraStyles = this.getExtraStyles();
+    // 
+    return (
+      <Paper style={this.getContainerStyles(computedStyles)} elevation={this.state.expanded ? 0 : this.state.elevation}>
+        <Animated.View style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: 56,
+          height: 56,
+          borderRadius: 500,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          opacity: this.state.transformAnimation.interpolate({
+            inputRange: [0, 50],
+            outputRange: [1, 0]
+          })
+        }}>
+          <Icon name={this.props.icon} style={computedStyles.sheet.icon} />
+          <Touchable
+            borderRadiusMask={500}
+            onPressIn={this.onPressIn.bind(this)}
+            onPressOut={this.onPressOut.bind(this)}
+            onPress={this.onPress.bind(this)}
+            onLongPress={props.onLongPress}
+            ripple="center"
+            rippleColor={computedStyles.ripple}
+            >
+          </Touchable>
+        </Animated.View>
+        {this.getContent(computedStyles)}
+      </Paper>
+    );
+    // onRippleDone={this.transform.bind(this)}
 
-    if (!this.state.toolbarVisible) {
-      return (
-        <Button
-          onLayout={(event) => {
-            this.layout = event.nativeEvent.layout;
-          } }
-          style={[styles.sheet.container, extraStyles]}
-          ripple="center"
-          rippleColor={styles.ripple}
-          onPress={this.onPress.bind(this)}
-          onLongPress={props.onLongPress}
-          onPressIn={this.onPressIn.bind(this)}
-          onPressOut={this.onPressOut.bind(this)}
-          onRippleDone={() => {
-            if (this.props.toolbar) {
-              this.transformToToolbar();
-            }
-          } }
-          elevation={this.state.elevation}>
-          <Icon name={this.props.icon} style={styles.sheet.icon} />
-        </Button>
-      );
-    }
-    if (this.state.toolbarVisible) {
-      return (
-        <Paper
-          elevation={this.state.elevation}
-          style={[styles.sheet.container, this.toolbarAnimationStyles]}
-          >
-          <Icon name={this.props.icon} style={styles.sheet.icon} />
-        </Paper>);
-    }
+    // return (
+    //   <Button
+    //     style={[styles.sheet.container, extraStyles]}
+    //     ripple="center"
+    //     rippleColor={styles.ripple}
+    //     onPress={this.onPress.bind(this)}
+    //     onLongPress={props.onLongPress}
+    //     onPressIn={this.onPressIn.bind(this)}
+    //     onPressOut={this.onPressOut.bind(this)}
+    //     onRippleDone={() => {
+    //       if (this.props.toolbar) {
+    //         this.transformToToolbar();
+    //       }
+    //     } }
+    //     elevation={this.state.elevation}>
+    //     
+    //   </Button>
+    // );
+
   }
 }

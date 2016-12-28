@@ -17,10 +17,10 @@ export default (theme, props) => {
   if (props.color) {
     backgroundColor = props.color;
   }
-  
+
   if (props.iconColor) {
     iconColor = props.iconColor;
-    rippleColor = Color(props.iconColor).fade(0.95).rgb().toString();
+    rippleColor = Color(props.iconColor).fade(0.5).rgb().toString();
   }
 
   if (props.mini) {
@@ -29,20 +29,49 @@ export default (theme, props) => {
     iconSize = 14;
   }
 
-
+  let posStyles = {};
+  if (props.position) {
+    posStyles.position = 'absolute';
+    posStyles = Object.assign(posStyles, props.position);
+  }
+  
   return {
     ripple: rippleColor,
     sheet: StyleSheet.create({
-      container: {
+      container: Object.assign({
         borderRadius: 500,
         backgroundColor,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'column',
+        width,
+        height,
+      }, posStyles),
+      containerToolbar: {
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        right: 0,
+        backgroundColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        height,
       },
       icon: {
         fontSize: iconSize,
         color: iconColor,
+        // position: 'absolute',
+        // top: 18.5,
+        // left: 18,
+      },
+      iconHide: {
+        fontSize: iconSize,
+        color: iconColor,
+        position: 'absolute',
+        top: 18.5,
+        left: 18,
+        opacity: 0,
       },
     })
   };
