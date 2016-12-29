@@ -126,6 +126,24 @@ export default class FlatingActionButton extends Component {
     }).start();
   }
 
+  componentWillUpdate(newProps, newState) {
+    let duration = 3000;
+    let toValue = newState.expanded ? 100 : 0;
+
+    let customAnim = LayoutAnimation.create(duration,
+      LayoutAnimation.Types.easeInEaseOut,
+      LayoutAnimation.Properties.opacity);
+
+
+
+    LayoutAnimation.configureNext(customAnim);
+    // LayoutAnimation.easeInEaseOut();
+    Animated.timing(this.state.transformAnimation, {
+      toValue,
+      duration
+    }).start();
+  }
+
   getAppearAnimationStyles() {
     let animateStyles = {};
     if (this.props.animate) {
@@ -149,73 +167,51 @@ export default class FlatingActionButton extends Component {
     if (!this.props.toolbar) {
       return;
     }
-    let transformDuration = 150;
-    var CustomLayoutSpring = {
-      duration: transformDuration,
-      create: {
-        type: LayoutAnimation.Types.linear,
-        property: LayoutAnimation.Properties.scaleXY,
-      },
-      update: {
-        type: LayoutAnimation.Types.linear,
-      },
-    };
-    LayoutAnimation.configureNext(CustomLayoutSpring);
-    Animated.timing(this.state.transformAnimation, {
-      toValue: 100,
-      duration: transformDuration,
-    }).start();
-
-    this.state.elevation.setValue(0);
-
     this.setState({
       expanded: true
     });
   }
 
   getContainerStyles(styles) {
+    let result = [];
     if (!this.state.expanded) {
-      return [styles.sheet.container, this.getAppearAnimationStyles()];
+      result = [styles.sheet.container, this.getAppearAnimationStyles()];
     }
     else {
-      return [styles.sheet.containerToolbar, {
-        borderRadius: this.state.transformAnimation.interpolate({
-          inputRange: [0, 90],
-          outputRange: [26, 0]
-        })
-      }];
+      result = [styles.sheet.containerToolbar];
     }
+
+    result.push({
+      borderRadius: this.state.transformAnimation.interpolate({
+        inputRange: [40, 90],
+        outputRange: [styles.borderRadius, 0]
+      })
+    });
+    return result;
   }
 
   getContent(styles) {
-    if (this.state.expanded) {
+    if (this.props.toolbar) {
       return (
-        <Animated.View style={{
-          flexDirection: 'row',
+        <Animated.View pointerEvents="box-none" style={[styles.sheet.contentToolbar, {
+          transform: [
+            {
+              scale: this.state.transformAnimation.interpolate({
+                inputRange: [30, 100],
+                outputRange: [0, 1]
+              })
+            }
+          ],
           opacity: this.state.transformAnimation.interpolate({
-            inputRange: [93, 100],
+            inputRange: [30, 100],
             outputRange: [0, 1]
           })
-        }}>
+        }]}>
+          <IconButton icon="update" style={{ marginRight: 10 }} />
+          <IconButton icon="event" style={{ marginRight: 10 }} />
           <IconButton icon="alarm-add" style={{ marginRight: 10 }} />
           <IconButton icon="alarm-on" style={{ marginRight: 10 }} />
           <IconButton icon="close" style={{ marginRight: 10 }} onPress={() => {
-            let transformDuration = 150;
-            var CustomLayoutSpring = {
-              duration: transformDuration,
-              create: {
-                type: LayoutAnimation.Types.linear,
-                property: LayoutAnimation.Properties.scaleXY,
-              },
-              update: {
-                type: LayoutAnimation.Types.linear,
-              },
-            };
-            LayoutAnimation.configureNext(CustomLayoutSpring);
-            Animated.timing(this.state.transformAnimation, {
-              toValue: 0,
-              duration: transformDuration,
-            }).start();
             this.setState({
               expanded: false
             });
@@ -225,8 +221,6 @@ export default class FlatingActionButton extends Component {
     }
   }
 
-
-
   render() {
     const theme = this.context.theme.FloatingActionButton;
     const props = this.props;
@@ -234,22 +228,17 @@ export default class FlatingActionButton extends Component {
 
     // 
     return (
-      <Paper style={this.getContainerStyles(computedStyles)} elevation={this.state.expanded ? 0 : this.state.elevation}>
-        <Animated.View style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: 56,
-          height: 56,
-          borderRadius: 500,
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          opacity: this.state.transformAnimation.interpolate({
-            inputRange: [0, 50],
-            outputRange: [1, 0]
-          })
-        }}>
+      <Paper
+        style={this.getContainerStyles(computedStyles)}
+        elevation={this.state.expanded ? 0 : this.state.elevation} >
+        {this.getContent(computedStyles)}
+        <Animated.View
+          style={[computedStyles.sheet.mainButton, {
+            opacity: this.state.transformAnimation.interpolate({
+              inputRange: [0, 50],
+              outputRange: [1, 0]
+            })
+          },]} >
           <Icon name={this.props.icon} style={computedStyles.sheet.icon} />
           <Touchable
             borderRadiusMask={500}
@@ -262,7 +251,6 @@ export default class FlatingActionButton extends Component {
             >
           </Touchable>
         </Animated.View>
-        {this.getContent(computedStyles)}
       </Paper>
     );
     // onRippleDone={this.transform.bind(this)}
